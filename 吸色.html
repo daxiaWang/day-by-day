@@ -1,0 +1,58 @@
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+                #abc-colorPicker .colorPick-close,#filter-colorPicker .colorPick-close{position:absolute;right:0;}
+                #abc-colorPicker a,#filter-colorPicker a,#colorPicker a{border-bottom:1px solid #000;border-left:1px solid #FFF;border-right:1px solid #000;border-top:1px solid #FFF;cursor:pointer;display:block;float:left;height:15px;overflow:hidden;width:15px;}
+                #abc-colorPicker a:hover,#filter-colorPicker a:hover,#colorPicker a:hover{opacity:.5;}
+                #abc-colorPicker li,#filter-colorPicker li,#colorPicker li{display:inline;list-style:none;overflow:hidden;}
+                #abc-colorPicker ul,#filter-colorPicker ul,#colorPicker ul{-moz-transition:all .8s ease-in 1s;-ms-transition:all .8s ease-in 1s;-o-transition:all .8s ease-in 1s;-webkit-transition:all .8s ease-in 1s;float:left;margin:0;overflow:hidden;transition:all .8s ease-in 1s;width:102px;}
+                #abc-colorPicker,#filter-colorPicker,#colorPicker{background:#FFF;border:solid 1px #eee;display:none;padding:5px;width:312px;}
+                #demo{height:600px;margin:0 auto;width:800px;}
+                *{margin:0;padding:0;}
+                .colorPicker-container a:hover{border-bottom:1px solid #000;border-top:1px solid #000;}
+                .colorPicker-preview{color:#FFF;display:inline-block;height:30px;line-height:30px;width:60px;}
+                .colorPicker-title{height:30px;overflow:hidden;}
+        </style>
+</head>
+<body>
+<div style="height:500px;"></div>
+<div id="demo">
+        <input type="text" id="filter"/>
+        <input type="text" id="abc"/>
+</div>
+<script type="text/javascript">
+/*
+  * Copyright 2012 enix@foxmail.com
+  */
+                function ColorPicker(k,j){var i=this,h=arguments.callee,l,b,c;if(!(this instanceof h))return i=new h(k,j);b=h.prototype;b.constructor=h;h.cache||(h.cache=[]);c={createColorData:function(){var a=h.cache,e,d,g,f=0,b,c=0;for(e=0;6>e;e++){a.push("<ul>");for(d=0;6>d;d++){a.push("<li>");for(g=0;6>g;g++)b=("000"+f.toString(16)).slice(-3).toUpperCase(),c++,i.color.push(b),a.push('<a index="'+c+'" style="background: #'+b+'" title="#'+b+'" javascript="void (0);"></a>'),f+=3;f+=30;a.push("</li>")}a.push("</ul>");
+                        f+=480}"function"===typeof this.ongetcolorstring&&this.ongetcolorstring.call(this.color)},getHtmlElement:function(a){this.element||(this.element={});this.element[a]||(this.element[a]=l.createElement(a));return this.element[a].cloneNode(!0)},each:function(a,e){var d,b=0,f=a.length>>>0;if("Object"==={}.toString.call(a).slice(8,-1))for(d in a){if(!1===e.call(a[d],d,a[d]))break}else for(;b<f&&!1!==e.call(a,b,a[b++]););},getViewportSize:function(){var a=[0,0];void 0!==window.innerWidth?a=[window.innerWidth,
+                        window.innerHeight]:a=[document.documentElement.clientWidth,document.documentElement.clientHeight];return a},getClinetRect:function(a){a=a.getBoundingClientRect();return a=a={left:a.left,right:a.right,top:a.top,bottom:a.bottom,height:a.height||a.bottom-a.top,width:a.width||a.right-a.left}},getScrollPosition:function(){var a=[0,0];window.pageYOffset?a=[window.pageXOffset,window.pageYOffset]:"undefined"!=typeof document.documentElement.scrollTop&&0<document.documentElement.scrollTop?a=[document.documentElement.scrollLeft,
+                        document.documentElement.scrollTop]:"undefined"!=typeof document.body.scrollTop&&(a=[document.body.scrollLeft,document.body.scrollTop]);return a},addEvent:function(a,e,b,c){a.attachEvent&&function(a,b,e){a.attachEvent("on"+b,e)}.apply(this,arguments);a.addEventListener&&function(a,b,e){a.addEventListener(b,e,c||!1)}.apply(this,arguments);a["on"+e]&&function(a,b,e){a["on"+b]=function(){e()}}.apply(this,arguments)}};b.Init=function(){l=document;this.color=[];this.offset=k;this.offsetSize=c.getClinetRect(this.offset);
+                        j||(this.prefix="colorPicker");j&&Object&&(c.each(j,function(a,b){i[a]||(i[a]=b)}),this.prefix=j.prefix?j.prefix+"-colorPicker":this.prefix);this.isInputText="input"===this.offset.nodeName.toLowerCase()&&"text"===this.offset.getAttribute("type");0==h.cache.length&&c.createColorData();this.createPacker().addEvent().render()};b.createPacker=function(){var a=[["div","id#"+this.prefix+",class#colorPicker"],["div","class#colorPicker-title"],["span","class#colorPicker-preview"],["input","type#button,class#colorPick-close,value#\u5173\u95ed"],
+                        ["div","class#colorPicker-container"]],b,d;c.each(a,function(g,f){b=c.getHtmlElement(f[0]);c.each(f[1].split(","),function(a,c){d=c.split("#");d[0]&&b.setAttribute(d[0],d[1])});a.splice(g,1,b)});this.elem=a;return this};b.addEvent=function(){c.addEvent(i.elem[4],"mouseover",function(a){i.eventContrl(a)},!1);c.addEvent(this.elem[4],"click",function(a){i.eventContrl(a)},!1);c.addEvent(this.elem[3],"click",function(){i.kill()},!1);return this};b.getColor=function(a){this.current&&this.current.constructor===
+                                String&&(a.className=this.current);this.elem[2].innerHTML=this.fixColorValue(a.title);this.elem[2].style.background=a.title};b.eventContrl=function(a){var a=a||window.event,b=this.getCurrent(a);b&&("mouseover"==a.type?this.getColor(b):this.outputValue(b))};b.getCurrent=function(a){a=a||window.event;for(a=a.target||a.srcElement;a&&(3==a.nodeType||"a"!==a.nodeName.toLowerCase());)a=a.parentNode;return this.currentElem=a};b.fixColorValue=function(a){return!a?-1:a.replace(/(\w)/g,function(){return RegExp.$1+
+                                RegExp.$1})};b.outputValue=function(a){a=this.fixColorValue(a.title);this.kill();!0===this.isInputText&&(this.offset.value=a);"function"===typeof this.ongetvalue&&this.ongetvalue.call([a]);return this};b.render=function(){var a=this.elem;a[1].appendChild(a[2]);a[1].appendChild(a[3]);a[0].appendChild(a[1]);a[0].appendChild(a[4]);this.offset.parentNode.appendChild(a[0]);a[4].innerHTML=h.cache.join("");"function"===typeof this.onrendered&&this.onrendered.call(this);return this};b.checkPosition=function(a,b){var a=this.elem[0],d=c.getClinetRect(a),g=c.getViewportSize(),f=c.getScrollPosition();if(!(d.height>g[1]||d.width>g[0]))return 0<d.right-g[0]&&(a.style.left=b.right-d.width+"px"),0<d.bottom-g[1]&&(a.style.top=b.top-d.height+f[1]+"px"),this};b.kill=function(){this.elem[0].style.display="none";return this};b.display=function(){var a=c.getClinetRect(this.offset),b=this.elem[0];b.style.display="block";b.style.cssText="position:absolute;top:"+this.offsetSize.bottom+"px;left:"+this.offsetSize.left+"px; display:block;";this.checkPosition(b,a);return this};this.Init()};
+</script>
+<script type="text/javascript">
+!function(window,doc,undefined){
+        window.ColorPicker = (ColorPicker);
+        a = ColorPicker(doc.getElementById('filter'), {prefix:'filter', ongetvalue:function () {
+                //console.log(this)
+        }, bdf:'xdfdf'});
+        doc.getElementById('filter').onfocus = function () {
+                a.display()
+        }
+        /*b = ColorPicker(doc.getElementById('abc'),{prefix:'abc', ongetvalue:function () {
+                console.log(this)
+        }})*/
+        b = ColorPicker(doc.getElementById('abc'));
+        doc.getElementById('abc').onfocus = function () {
+                b.display()
+        }
+}(this,document)
+</script>
+<div style="height:600px;"></div>
+</body>
+</html>

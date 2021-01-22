@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="./node_modules/vue/dist/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+        <div>
+            <p> 默认一行 {{count}} 个</p>
+            <p> label宽 {{labelWidth}} </p>
+        </div>
+
+
+        <div class="cont">
+            <div v-for="(item, index) in dataList" :key="index" class="item">
+                <div v-for="(ite, ind) in item.data" :key="ind" class="ite">
+                    <span>{{ ite.label }}</span><span>{{ ite.value }}{{ite.append}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data() {
+            return {
+                count: 2,
+                labelWidth: 100,
+                dataList: [{
+                    data: [{
+                        "label": "总收入",
+                        "value": "5000",
+                        "append": "元"
+                    }]
+                }, {
+                    data: [{
+                        "label": "收入量最多渠道",
+                        "value": "渠道A"
+                    }, {
+                        "label": "收入量最少渠道",
+                        "value": "渠道B"
+                    }]
+                }, {
+                    data: [{
+                        "label": "渠道A收入",
+                        "value": "200",
+                        "append": "元"
+                    }, {
+                        "label": "渠道A收入占比",
+                        "value": "10",
+                        "append": "%"
+                    }]
+                }, {
+                    data: [{
+                        "label": "渠道A收入",
+                        "value": "200",
+                        "append": "元"
+                    }, {
+                        "label": "渠道A收入占比",
+                        "value": "10",
+                        "append": "%"
+                    }, {
+                        "label": "渠道A收入占比",
+                        "value": "10",
+                        "append": "%"
+                    }]
+                }, {
+                    data: [{
+                        "label": "渠道A收入",
+                        "value": "200",
+                        "append": "元"
+                    }, {
+                        "label": "渠道A收入占比",
+                        "value": "10",
+                        "append": "%"
+                    }, {
+                        "label": "渠道A收入占比",
+                        "value": "10",
+                        "append": "%"
+                    }, {
+                        "label": "渠道A收入占比道",
+                        "value": "10",
+                        "append": "%"
+                    }]
+                }, {
+                    data: [{
+                        "label": "渠道A收入",
+                        "value": "200",
+                        "append": "元"
+                    }, {
+                        "label": "渠道A收入占比",
+                        "value": "10%"
+                    }, {
+                        "label": "渠道A收入占比",
+                        "value": "10%"
+                    }, {
+                        "label": "渠道A收入占比",
+                        "value": "10%"
+                    }, {
+                        "label": "渠道A收入占比",
+                        "value": "10%"
+                    }]
+                }, ]
+            }
+        },
+    })
+</script>
+
+</html>

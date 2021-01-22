@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+        
+        div {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .25s;
+        }
+        
+        div.active {
+            max-height: 666px;
+            /* 需要足够大的值 */
+        }
+        /* .ao {
+            display: inline-block;
+            width: 0;
+        }*/
+        
+        .ao::before {
+            content: "love 你 love";
+            outline: 2px solid #000;
+            /* color: #fff; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class='ao'>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+</body>
+
+</html>

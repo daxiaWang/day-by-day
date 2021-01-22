@@ -1,0 +1,44 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#app {
+    width: 60%;
+    margin: 10px auto;
+}
+
+.cont {
+    border: 1px solid;
+    border-right: 0;
+}
+
+.item {
+    display: flex;
+    flex: 1;
+}
+
+.item:not(:last-child) {
+    border-bottom: 1px solid;
+}
+
+.ite {
+    display: flex;
+    flex: 1;
+    border-right: 1px solid;
+}
+
+span {
+    display: inline-block;
+    padding: 10px;
+    word-break: break-all;
+}
+
+span:nth-child(1) {
+    width: 130px;
+    border-right: 1px solid;
+}
+
+span:nth-child(2) {
+    border-left: 0;
+}
