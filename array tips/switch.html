@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function test1() {
+        console.log("test1")
+    }
+
+    function test() {
+        console.log("test")
+    }
+
+    function test2() {
+        console.log("test2")
+    }
+
+    function switchFn(params) {
+        switch (params) {
+            case 1:
+                test1();
+                break;
+            case 2:
+                test2();
+                break;
+
+            default:
+                test()
+                break;
+        }
+
+    }
+
+    function switchFn1(params) {
+        var data = {
+            1: test1,
+            2: test2,
+            3: test
+        }
+        data[params] && data[params]()
+    }
+    switchFn(1)
+    switchFn1(1)
+
+
+    const strData = `abc abc abc abc abc abc
+         test test,test test test test`
+    console.log("strData", strData)
+
+
+    // 冗余
+    function getArea(diameter) {
+        return Math.PI * diameter
+    }
+
+    // 简洁
+    // getArea = diameter => (
+    //     Math.PI * diameter;
+    // )
+
+
+    // 冗余
+    Math.pow(2, 3);
+
+    // 简洁而
+    2 ** 3 // 8
+</script>
+
+</html>

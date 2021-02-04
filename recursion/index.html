@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    const NAVLIST = [{
+        display: true,
+        label: '1-1',
+        id: 11
+    }, {
+        display: false,
+        label: '1-2',
+        id: 12,
+        children: [{
+            display: false,
+            label: '1-2-1',
+            id: 121,
+            children: [{
+                display: false,
+                label: '1-2-1-1',
+                id: 1211,
+            }, {
+                display: false,
+                label: '1-2-1-2',
+                id: 1212,
+            }]
+        }, {
+            display: false,
+            label: '1-2-2',
+            id: 122,
+        }]
+    }]
+
+    function forFn(arr) {
+        arr.forEach(item => {
+            if (item.children) {
+                forFn(item.children)
+            }
+            item.flag = true
+        })
+        return arr
+    }
+
+    console.log("forFn(NAVLIST)", forFn(NAVLIST))
+
+    /**
+        递归调用的过程。
+        递归终止的条件。
+    */
+
+    var recursionFn = function(arr) {
+        return arr.map(item => {
+
+        })
+    }
+    console.log("recursionFn", recursionFn(NAVLIST))
+
+    const HEADERDATA = {
+        name: '总数据',
+        children: [{
+            name: '数据1',
+            children: [{
+                    name: '数据11',
+                    children: [{
+                        name: '数据111',
+                    }, {
+                        name: '数据112',
+                    }]
+                }, {
+                    name: '数据12',
+                    children: [{
+                        name: '数据121',
+                    }, {
+                        name: '数据122',
+                    }]
+                }, {
+                    name: '数据13',
+                    children: [{
+                        name: '数据131',
+                    }, {
+                        name: '数据132',
+                    }]
+                }, {
+                    name: '数据14',
+                },
+
+            ]
+        }]
+    }
+
+    function getLeafCountTree(json) {
+        if (!json.children) {
+            return 1
+        } else {
+            var leafCount = 0;
+            for (var i = 0; i < json.children.length; i++) {
+                leafCount = leafCount + getLeafCountTree(json.children[i])
+            }
+            return leafCount
+        }
+    }
+
+    console.log("getLeafCountTree", getLeafCountTree(HEADERDATA))
+
+    function f(n, a) {
+        return (n == 1) ? a : f(n - 1, a * n);
+    }
+    console.log(f(5, 1)); //120
+
+    function add(n) {
+        let count = 0
+        for (let a = 1; a <= n; a++) {
+            count = count + a
+        }
+        return count
+    }
+
+    const sum = (n) => {
+        if (n <= 1) return n;
+        return n + sum(n - 1)
+    }
+
+    const sum1 = (n, prevSum = 0) => {
+        if (n <= 1) return n + prevSum
+        return sum1(n - 1, n + prevSum)
+    }
+
+    function aaa(count) {
+        console.log("add", add(count))
+        console.log("sum", sum(count))
+        console.log("sum1", sum1(count))
+    }
+    aaa(1000000000)
+</script>
+
+</html>

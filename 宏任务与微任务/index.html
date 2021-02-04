@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /**
+                                                                                                                                    宏任务：常见的定时器setTimeout，用户交互事件
+                                                                                                                                    微任务：promise相关任务
+                                                                                                                                */
+    /**
+      原则1：
+        万物皆从全局上下文准备退出，全局的同步代码运行结束的这个时机开始
+            当执行完了console.log("1-2");的时候，意味着全局的上下文马上要退出了,因为此时全局的同步代码都执行完了,剩下的都是异步代码
+      原则2：
+        同一层级下，微任务永远比宏任务先执行，Promise.then比setTimeout先执行
+            即Promise.then比setTimeout先执行
+            所以先打印1-3,再打印1-1
+      原则3：
+        每个宏任务,都单独关联了一个微任务队列
+    */
+    async function app() {
+        setTimeout(() => {
+            console.log("1-1");
+            Promise.resolve().then(() => {
+                console.log("2-1");
+            });
+        });
+        console.log("1-2");
+        Promise.resolve().then(() => {
+            console.log("1-3");
+            setTimeout(() => {
+                console.log("3-1");
+            });
+        });
+    }
+    // app();
+
+    // function executor(resolve, reject) {
+    //     let rand = Math.random()
+    //     console.log(1)
+    //     if (rand > 0.5) resolve()
+    //     reject()
+    // }
+    // const p0 = new Promise(executor)
+    // const p1 = p0.then(_ => {
+    //     console.log('success-0')
+    //     return new Promise(executor)
+    // })
+    // const p2 = p1.then(_ => {
+    //     console.log('success-1')
+    //     return new Promise(executor)
+    // })
+    // p2.catch(_ => {
+    //     console.log('error')
+    // })
+    // console.log(2)
+    //1 2 success-0 success-1
+
+    {
+        // console.log('1')
+        // setTimeout(() => {
+        //     console.log('2')
+        // })
+        // new Promise((resolve, rejects) => {
+        //     console.log('3')
+        //     resolve()
+        // }).then(() => {
+        //     console.log('4')
+        // })
+        // console.log(5)
+        //1 3 5 4 2
+    } {
+        // console.log('1')
+        // setTimeout(() => {
+        //     console.log('2')
+        // })
+        // new Promise((resolve, rejects) => {
+        //     console.log('3')
+        //     resolve()
+        // }).then(() => {
+        //     let i = 0
+        //     while (i < 1000000000) {
+        //         i++
+        //     }
+        //     console.log('4')
+        // })
+        // let i = 0
+        // while (i < 1000000000) {
+        //     i++
+        // }
+        // console.log(5)
+    } {
+        console.log(1)
+        setTimeout(() => {
+            console.log(2)
+        }, 1000)
+        async function fn() {
+            console.log(3)
+            setTimeout(() => {
+                console.log(4)
+            }, 20)
+            return Promise.reject()
+        }
+        async function run() {
+            console.log(5)
+            await fn()
+            console.log(6)
+        }
+        run()
+            //需要执行150ms左右
+        for (let i = 0; i < 90000000; i++) {}
+        setTimeout(() => {
+            console.log(7)
+            new Promise(resolve => {
+                console.log(8)
+                resolve()
+            }).then(() => {
+                console.log(9)
+            })
+        }, 0)
+        console.log(10)
+
+        // 1 5 3 10 6 4 2
+    }
+</script>
+
+</html>
