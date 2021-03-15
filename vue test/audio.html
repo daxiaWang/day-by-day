@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <div>
+                <input type="text" id="ttsText">
+                <input type="button" id="tts_btn" @click="myplay()" value="播放">
+            </div>
+            <div id="bdtts_div_id">
+                <audio id="tts_autio_id" autoplay="autoplay">
+           <source id="tts_source_id" src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=9&text= " type="audio/mpeg">
+           <embed id="tts_embed_id" height="0" width="0" src="">
+         </audio>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script type='text/javascript'>
+    function checkArray(key) {
+        let arr = ['1', '2', '3', '4', 'demo']
+        let index = arr.indexOf(key)
+        if (index > -1) {
+            return true // 有权限
+        } else {
+            return false // 无权限
+        }
+    }
+    console.log("checkArray", checkArray)
+    Vue.directive("permission", {
+        inserted(el, binding) {
+            let permission = binding.value; // 获取到 v-permission的值
+            if (permission) {
+                let hasPermission = checkArray(permission);
+                if (!hasPermission) { // 没有权限 移除Dom元素
+                    el.parentNode && el.parentNode.removeChild(el);
+                }
+            }
+        }
+    });
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        methods: {
+
+            myplay() {
+                var ttsDiv = document.getElementById('bdtts_div_id');
+                var ttsAudio = document.getElementById('tts_autio_id');
+                var ttsText = document.getElementById('ttsText').value;
+                ttsDiv.removeChild(ttsAudio);
+                var au1 = '<audio id="tts_autio_id" autoplay="autoplay">';
+                var sss = '<source id="tts_source_id" src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text=' + ttsText + '" type="audio/mpeg">';
+                var eee = '<embed id="tts_embed_id" height="0" width="0" src="">';
+                var au2 = '</audio>';
+                ttsDiv.innerHTML = au1 + sss + eee + au2;
+                ttsAudio = document.getElementById('tts_autio_id');
+                ttsAudio.play();
+            },
+        },
+    })
+    console.log("app", app)
+</script>
+
+</html>

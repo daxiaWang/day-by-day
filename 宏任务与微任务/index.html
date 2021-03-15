@@ -11,21 +11,27 @@
 
 </body>
 <script>
-    /**
-                                                                                                                                    宏任务：常见的定时器setTimeout，用户交互事件
-                                                                                                                                    微任务：promise相关任务
-                                                                                                                                */
+    /** 宏任务：常见的定时器setTimeout，用户交互事件；微任务：promise相关任务 */
     /**
       原则1：
         万物皆从全局上下文准备退出，全局的同步代码运行结束的这个时机开始
             当执行完了console.log("1-2");的时候，意味着全局的上下文马上要退出了,因为此时全局的同步代码都执行完了,剩下的都是异步代码
       原则2：
         同一层级下，微任务永远比宏任务先执行，Promise.then比setTimeout先执行
-            即Promise.then比setTimeout先执行
+            即Promise.then比setTimeout先执行（注意：new Promise()的时候是同步的，会立即执行。）
             所以先打印1-3,再打印1-1
       原则3：
         每个宏任务,都单独关联了一个微任务队列
     */
+    /**
+        遇到同步代码，依次推入同步队列并执行
+        当遇到setTimeout setInterval,会被推到宏任务队列
+        如果遇到.then，会被当做微任务，被推入微任务队列
+        同步队列执行完毕，然后去微任务取任务，直到微任务队列清空。然后检查宏任务队列，去宏队列取任务，并且每一个宏任务执行完毕都会去微任务队列跑一遍，看看有没有新的微任务，有的话再把微任务清空。这样依次循环。
+
+        同步代码—> 微任务（要全部执行）—>宏任务（执行一个）—>微任务（全部执行）—>宏任务（执行一个）
+
+   */
     async function app() {
         setTimeout(() => {
             console.log("1-1");
@@ -97,38 +103,69 @@
         //     i++
         // }
         // console.log(5)
-    } {
-        console.log(1)
-        setTimeout(() => {
-            console.log(2)
-        }, 1000)
-        async function fn() {
-            console.log(3)
-            setTimeout(() => {
-                console.log(4)
-            }, 20)
-            return Promise.reject()
-        }
-        async function run() {
-            console.log(5)
-            await fn()
-            console.log(6)
-        }
-        run()
-            //需要执行150ms左右
-        for (let i = 0; i < 90000000; i++) {}
-        setTimeout(() => {
-            console.log(7)
-            new Promise(resolve => {
-                console.log(8)
-                resolve()
-            }).then(() => {
-                console.log(9)
-            })
-        }, 0)
-        console.log(10)
+    }
+    // {
+    //     console.log(1)
+    //     setTimeout(() => {
+    //         console.log(2)
+    //     }, 1000)
+    //     async function fn() {
+    //         console.log(3)
+    //         setTimeout(() => {
+    //             console.log(4)
+    //         }, 20)
+    //         return Promise.reject()
+    //     }
+    //     async function run() {
+    //         console.log(5)
+    //         await fn()
+    //         console.log(6)
+    //     }
+    //     run()
+    //         //需要执行150ms左右
+    //     for (let i = 0; i < 90000000; i++) {}
+    //     setTimeout(() => {
+    //         console.log(7)
+    //         new Promise(resolve => {
+    //             console.log(8)
+    //             resolve()
+    //         }).then(() => {
+    //             console.log(9)
+    //         })
+    //     }, 0)
+    //     console.log(10)
 
-        // 1 5 3 10 6 4 2
+    //     // 1 5 3 10 6 4 2
+    // }
+    {
+        console.log('script start')
+
+        async function async1() {
+            await async2()
+            console.log('async1 end')
+        }
+        async function async2() {
+            console.log('async2 end')
+        }
+        async1()
+
+        setTimeout(function() {
+            console.log('setTimeout')
+        }, 0)
+
+        new Promise(resolve => {
+                console.log('Promise')
+                resolve()
+            })
+            .then(function() {
+                console.log('promise1')
+            })
+            .then(function() {
+                console.log('promise2')
+            })
+
+        console.log('script end')
+            //start async2 Promise end async1 promise1 promise2 setTimeout
     }
 </script>
 

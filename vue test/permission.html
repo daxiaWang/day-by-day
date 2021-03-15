@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{message}}
+        <div class="btns">
+            <button v-permission="'1'">权限按钮1</button>
+            <button v-permission="'10'">权限按钮2</button>
+            <button v-permission="'demo'">权限按钮3</button>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type='text/javascript'>
+    function checkArray(key) {
+        let arr = ['1', '2', '3', '4', 'demo']
+        let index = arr.indexOf(key)
+        if (index > -1) {
+            return true // 有权限
+        } else {
+            return false // 无权限
+        }
+    }
+    console.log("checkArray", checkArray)
+    Vue.directive("permission", {
+        inserted(el, binding) {
+            let permission = binding.value; // 获取到 v-permission的值
+            if (permission) {
+                let hasPermission = checkArray(permission);
+                if (!hasPermission) { // 没有权限 移除Dom元素
+                    el.parentNode && el.parentNode.removeChild(el);
+                }
+            }
+        }
+    });
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        methods: {},
+    })
+    console.log("app", app)
+</script>
+
+</html>
