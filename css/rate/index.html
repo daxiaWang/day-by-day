@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./iconfonts/iconfont.css">
+    <style>
+        /* 去掉默认样式 */
+        
+        input {
+            -webkit-appearance: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+        
+         :root {
+            /*高亮颜色*/
+            --main: #ffa822;
+            /*默认颜色*/
+            --basic: #999;
+        }
+        
+        .rate-content input[name="rate"] {
+            font-family: "iconfont";
+            /*之前引入的iconfont字体*/
+            font-size: 30px;
+            padding-right: 10px;
+        }
+        
+        .rate-content input[name="rate"]::after {
+            content: "\e646";
+            color: var(--basic);
+            /*加点颜色过渡效果*/
+            transition: color .4s ease;
+        }
+        /* 实现选中单个星星 */
+        /* 高亮的星星 */
+        /* input[name="rate"]:checked::after {
+            content: "\e647";
+            color: var(--main);
+        } */
+        /*实现连同兄弟元素一起高亮*/
+        
+        input[name="rate"]:checked::after,
+        input[name="rate"]:checked~input[name="rate"]::after {
+            content: "\e647";
+            color: var(--main);
+        }
+        
+        .rate-content {
+            display: flex;
+            flex-flow: row-reverse;
+        }
+        
+        input[name="rate"]:checked,
+        input[name="rate"]:hover::after {
+            content: "\e647";
+            color: var(--main);
+        }
+        /* 兄弟元素一起高亮 */
+        
+        input[name="rate"]:hover~input[name="rate"]::after {
+            content: "\e647";
+            color: var(--main);
+        }
+        /* 加入放大动画 */
+        
+        input[name="rate"] {
+            transition: transform .2s ease;
+        }
+        
+        input[name="rate"]:checked,
+        input[name="rate"]:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rate-content">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+    </div>
+</body>
+
+</html>
