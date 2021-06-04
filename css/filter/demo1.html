@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form id="imageEditor">
+    <p>
+      <label for="gs">Grayscale</label>
+      <input id="gs" name="gs" type="range" min="0" max="100" value="0">
+    </p>
+    <p>
+      <label for="blur">Blur</label>
+      <input id="blur" name="blur" type="range" min="0" max="10" value="0">
+    </p>
+    <p>
+      <label for="br">Exposure</label>
+      <input id="br" name="br" type="range" min="0" max="200" value="100">
+    </p>
+    <p>
+      <label for="ct">Contrast</label>
+      <input id="ct" name="ct" type="range" min="0" max="200" value="100">
+    </p>
+    <p>
+      <label for="huer">Hue Rotate</label>
+      <input id="huer" name="huer" type="range" min="0" max="360" value="0">
+    </p>
+    <p>
+      <label for="opacity">Opacity</label>
+      <input id="opacity" name="opacity" type="range" min="0" max="100" value="100">
+    </p>
+    <p>
+      <label for="invert">Invert</label>
+      <input id="invert" name="invert" type="range" min="0" max="100" value="0">
+    </p>
+    <p>
+      <label for="saturate">Saturate</label>
+      <input id="saturate" name="saturate" type="range" min="0" max="500" value="100">
+    </p>
+    <p>
+      <label for="sepia">Sepia</label>
+      <input id="sepia" name="sepia" type="range" min="0" max="100" value="0">
+    </p>
+    <input type="reset" form="imageEditor" id="reset" value="Reset" />
+  </form>
+  <div id="imageContainer" class="center">
+    <img src="./img/1.png">
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  function editImage() {
+    var gs = $("#gs").val();                // grayscale
+    var blur = $("#blur").val();            // blur
+    var br = $("#br").val();                // brightness
+    var ct = $("#ct").val();                // contrast
+    var huer = $("#huer").val();            // hue-rotate
+    var opacity = $("#opacity").val();      // opacity
+    var invert = $("#invert").val();        // invert
+    var saturate = $("#saturate").val();    // saturate
+    var sepia = $("#sepia").val();          // sepia
+    $("#imageContainer img").css(
+      "filter", 'grayscale(' + gs +
+      '%) blur(' + blur +
+      'px) brightness(' + br +
+      '%) contrast(' + ct +
+      '%) hue-rotate(' + huer +
+      'deg) opacity(' + opacity +
+      '%) invert(' + invert +
+      '%) saturate(' + saturate +
+      '%) sepia(' + sepia + '%)'
+    );
+    $("#imageContainer img").css(
+      "-webkit-filter", 'grayscale(' + gs +
+      '%) blur(' + blur +
+      'px) brightness(' + br +
+      '%) contrast(' + ct +
+      '%) hue-rotate(' + huer +
+      'deg) opacity(' + opacity +
+      '%) invert(' + invert +
+      '%) saturate(' + saturate +
+      '%) sepia(' + sepia + '%)'
+    );
+  }
+  // 当input值发生变化时即时应用滤镜
+  $("input[type=range]").change(editImage).mousemove(editImage);
+</script>
+
+</html>

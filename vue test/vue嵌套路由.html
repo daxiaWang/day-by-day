@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>掘金</title>
+</head>
+
+<body>
+  <div id="app">
+
+  </div>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script>
+
+    Vue.use(VueRouter);
+
+    //第二层路由组件，实现了嵌套的路由组件
+    // 这一层的三个路由组件：推荐、后端、前端可以看成结构是相同的，只有数据不同
+    // 所以为了提高代码的复用性，就需要采用动态路由匹配的方式，及只创建一个组件，然后替换里面的数据
+    var Home = {
+      template: `
+            <div>
+            <router-link :to="{name:'category', params:{category:'recommened'}}">推荐</router-link>
+            <router-link :to="{name:'category', params:{category:'backend'}}">后端</router-link>
+            <router-link :to="{name:'category', params:{category:'fronted'}}">前端</router-link>
+
+            <router-view></router-view>
+
+            </div>
+        `
+    };
+
+    var Pins = {
+      template: `<div>我是沸点</div>`
+    };
+
+    var Topics = {
+      template: `<div>我是话题</div>`
+    };
+
+    // 创建一个组件，然后使用动态路由匹配的方式
+    var Commons = {
+      data() {
+        return {
+          msg: 'recommened'
+        }
+      },
+      template: `
+            <div>
+             我是 {{ msg }}
+            </div>
+        `,
+      watch: {
+        // 利用watch侦听器来监听$route来检测动态路由的切换
+        '$route'(to, from) {
+          console.log(to.params.category);
+
+          // 模拟路由的变化引起的数据的变化
+          this.msg = to.params.category;
+        }
+      }
+    };
+
+    var router = new VueRouter({
+      routes: [
+        {
+          path: '/',
+          component: Home,
+          // 嵌套路由的写法：
+          children: [
+            {
+              path: 'welcome/:category',
+              name: 'category',
+              component: Commons
+            }
+          ]
+        },
+        {
+          path: '/pins',
+          component: Pins
+        },
+        {
+          path: '/topics',
+          component: Topics
+        }
+      ]
+    });
+
+    // 第一层路由组件包括首页、沸点、话题等
+    var FRouter = {
+      template: `
+            <div>
+                第一层路由组件
+                <router-link to="/">首页</router-link>
+                <router-link to="/pins">沸点</router-link>
+                <router-link to="/topics">话题</router-link>
+
+                <router-view></router-view>
+            </div>
+        `
+
+    };
+
+
+    new Vue({
+      el: '#app',
+      router: router,
+      template: '<FRouter />',
+      components: {
+        FRouter
+      }
+    });
+  </script>
+</body>
+
+</html>

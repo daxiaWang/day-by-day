@@ -1,0 +1,121 @@
+.wrap {
+    display: grid;
+    /* grid-template-columns: 300px 300px 300px;
+    grid-template-rows: 300px 300px 300px; */
+    grid-template-columns: repeat(5, 20%);
+    /* grid-template-rows: repeat(3, 33.33%); */
+    /* 片段 */
+    /* grid-template-columns: 300px 1fr 2fr; */
+}
+
+.radial-gradient {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(yellow, red);
+}
+
+.radial-gradient1 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, yellow, red);
+}
+
+.radial-gradient2 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(223.6px circle, yellow, red);
+}
+
+.radial-gradient3 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(200px circle, yellow, red);
+}
+
+.radial-gradient4 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle at 12.5% 25%, yellow, red);
+}
+
+.radial-gradient5 {
+    width: 200px;
+    height: 200px;
+    border: 1px solid silver;
+    background: radial-gradient(closest-side circle, yellow, orange, red, white);
+}
+
+.radial-gradient6 {
+    width: 200px;
+    height: 200px;
+    border: 1px solid gray;
+    background: radial-gradient(closest-side circle, yellow 1%, orange 13.33%, red 86.666%, white);
+}
+
+.radial-gradient7 {
+    width: 200px;
+    height: 200px;
+    /* 50px 100px ellipse中第一个数值50px表示横轴半径，100px表示纵轴半径，于是这段语句表示绘制一个长度100px高度200px的椭圆。 */
+    background: radial-gradient(50px 100px ellipse, transparent 40px, yellow 41px, red);
+}
+
+.radial-gradient8 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(50px 100px ellipse, transparent 40px, yellow 41px, red 49px, transparent 50px), radial-gradient(30px circle, red, red 29px, transparent 30px);
+}
+
+.radial-gradient9 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(5px 10px ellipse, transparent 4px, yellow 5px, red 6px, transparent 7px), radial-gradient(3px circle, red, red 3px, transparent 4px);
+    background-size: 25px;
+}
+
+.radial-gradient10 {
+    width: 200px;
+    height: 100px;
+    background: red;
+    position: relative;
+}
+
+.radial-gradient10:after {
+    content: '';
+    position: absolute;
+    height: 10px;
+    left: 0;
+    right: 0;
+    bottom: -10px;
+    background: radial-gradient(20px 15px ellipse at top, red 10px, transparent 11px);
+    background-size: 20px 10px;
+}
+
+.radial-gradient11 {
+    position: relative;
+    width: 262px;
+    height: 262px;
+    border-radius: 50%;
+    background: linear-gradient(30deg, transparent 40%, rgba(42, 41, 40, .85) 40%) no-repeat 100% 0, linear-gradient(60deg, rgba(42, 41, 40, .85) 60%, transparent 60%) no-repeat 0 100%, repeating-radial-gradient(#2a2928, #2a2928 4px, #ada9a0 5px, #2a2928 6px);
+    background-size: 50% 100%, 100% 50%, 100% 100%;
+}
+
+.radial-gradient11:after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -35px;
+    border: solid 1px #d9a388;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px #da5b33, inset 0 0 0 27px #da5b33;
+    background: #b5ac9a;
+    content: '';
+}
+
+.radial-gradient12 {
+    width: 100px;
+    height: 100px;
+    border: 50px solid;
+    border-image: radial-gradient(circle, transparent 50px, yellow 51px, red) 50 stretch;
+}

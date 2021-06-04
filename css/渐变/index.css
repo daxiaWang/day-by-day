@@ -1,0 +1,36 @@
+ body {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  div {
+    width: 300px;
+    height: 300px;
+    border: 1px solid;
+  }
+
+  .a {
+    width: 500px;
+    height: 500px;
+    background-color: black;
+    background-image: radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 40px);
+  }
+
+  .div2 {
+    width: 500px;
+    height: 100px;
+    background: linear-gradient(135deg, blue, red);
+    ;
+  }
+
+  .div3 {
+    width: 500px;
+    height: 100px;
+    background: linear-gradient(
+			135deg, 
+			rgba(127, 217, 179, 0) 0%, 
+			rgba(152, 225, 194, 0.28) 5%, 
+			rgba(255, 255, 255, 1) 20%, 
+			rgba(255, 255, 255, 1) 100%
+		);
+  }

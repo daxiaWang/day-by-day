@@ -7,15 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        --black: #000000;
+         :root {
+            --main-bg-color: pink;
+            --black: #000000;
+        }
+        
+        element {
+            --aa: red
+        }
+        
         body {
-            background-color: var(--black);
+            background-color: var(--black, red);
+        }
+        
+        p {
+            color: var(--aa);
         }
     </style>
 </head>
 
 <body>
     11111
+    <div style="color:blue; border: 1px dashed currentcolor;">
+        The color of this text is blue.
+        <div style="background:currentcolor; height:9px;"></div>
+        This block is surrounded by a blue border.
+    </div>
+    <p>qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq</p>
 </body>
 
 </html>

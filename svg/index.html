@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        html {
+            background-color: #000;
+        }
+        
+         :root {
+            --woocommerce: #a46497;
+            --wc-green: #7ad03a;
+            --wc-red: #a00;
+            --wc-orange: #ffba00;
+            --wc-blue: #2ea2cc;
+            --wc-primary: #a46497;
+            --wc-primary-text: white;
+            --wc-secondary: #ebe9eb;
+            --wc-secondary-text: #515151;
+            --wc-highlight: #77a464;
+            --wc-highligh-text: white;
+            --wc-content-bg: #fff;
+            --wc-subtext: #767676;
+        }
+        
+        .icon-logo-star {
+            position: absolute;
+            fill: url(#orange-to-pink);
+            width: 120px;
+            height: 120px;
+            z-index: 3;
+            top: 90px;
+            left: var(--gap);
+        }
+        
+        .footer-form-wrap {
+            background: #434343;
+            padding: 1.5rem;
+            margin: -3rem 0 0;
+            position: relative;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            margin-top: 100px;
+            margin-left: 300px;
+        }
+        
+        .footer-form-wrap:after {
+            content: "";
+            position: absolute;
+            z-index: 5;
+            top: 0;
+            right: 100%;
+            width: 20px;
+            height: 48px;
+            background: #909090;
+            -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%);
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <img width="200" height="200" src="https://css-tricks.com/wp-content/uploads/2019/08/mvp-star-1000x998.png" class="wp-post-image" alt="" loading="lazy" title="mvp-star" data-caption="" data-src="https://css-tricks.com/wp-content/uploads/2019/08/mvp-star.png"
+        data-large_image="https://css-tricks.com/wp-content/uploads/2019/08/mvp-star.png" data-large_image_width="1050" data-large_image_height="1048" srcset="https://css-tricks.com/wp-content/uploads/2019/08/mvp-star-1000x998.png 1000w, https://css-tricks.com/wp-content/uploads/2019/08/mvp-star-300x300.png 300w, https://css-tricks.com/wp-content/uploads/2019/08/mvp-star-1024x1022.png 1024w, https://css-tricks.com/wp-content/uploads/2019/08/mvp-star-150x150.png 150w, https://css-tricks.com/wp-content/uploads/2019/08/mvp-star-768x767.png 768w, https://css-tricks.com/wp-content/uploads/2019/08/mvp-star-100x100.png 100w, https://css-tricks.com/wp-content/uploads/2019/08/mvp-star.png 1050w"
+        sizes="(min-width: 735px) 864px, 96vw">
+    <svg class="icon-logo-star" width="35px" height="35px" viewBox="0 0 362.62 388.52" data-spin-me="false">
+    <path d="M156.58,239l-88.3,64.75c-10.59,7.06-18.84,11.77-29.43,11.77-21.19,0-38.85-18.84-38.85-40C0,257.83,14.13,244.88,27.08,239l103.6-44.74L27.08,148.34C13,142.46,0,129.51,0,111.85,0,90.66,18.84,73,40,73c10.6,0,17.66,3.53,28.25,11.77l88.3,64.75L144.81,44.74C141.28,20,157.76,0,181.31,0s40,18.84,36.5,43.56L206,149.52l88.3-64.75C304.93,76.53,313.17,73,323.77,73a39.2,39.2,0,0,1,38.85,38.85c0,18.84-12.95,30.61-27.08,36.5L231.93,194.26,335.54,239c14.13,5.88,27.08,18.83,27.08,37.67,0,21.19-18.84,38.85-40,38.85-9.42,0-17.66-4.71-28.26-11.77L206,239l11.77,104.78c3.53,24.72-12.95,44.74-36.5,44.74s-40-18.84-36.5-43.56Z"></path>
+    </svg>
+    <svg width="0" height="0" class="screen-reader">
+      <defs>
+      <linearGradient id="orange-to-pink" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ff7a18"></stop>
+      <stop offset="40%" stop-color="#af002d"></stop>
+      <stop offset="100%" stop-color="#319197"></stop>
+      </linearGradient>
+      <filter id="duotone_orange_pink">
+      <feColorMatrix type="matrix" result="grayscale" values="1 0 0 0 0
+                        1 0 0 0 0
+                        1 0 0 0 0
+                        0 0 0 1 0">
+      </feColorMatrix>
+      <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
+      <feFuncR type="table" tableValues="0.7411764706 0.9882352941"></feFuncR>
+      <feFuncG type="table" tableValues="0.0431372549 0.7333333333"></feFuncG>
+      <feFuncB type="table" tableValues="0.568627451 0.05098039216"></feFuncB>
+      <feFuncA type="table" tableValues="0 1"></feFuncA>
+      </feComponentTransfer>
+      </filter>
+      </defs>
+      </svg>
+    <div class="footer-form-wrap">
+        <form action="https://chriscoyier.us2.list-manage.com/subscribe/post?u=155f5a9ccc4e24c318130cace&amp;id=197f127a68" method="post" id="mc-embedded-subscribe-form">
+            <h4>Keep up to date on web dev</h4>
+            <p>with our hand-crafted weekly newsletter</p>
+            <div class="footer-form">
+                <label for="mce-EMAIL" class="screen-reader">Email Address</label>
+                <input type="email" name="EMAIL" class="required email mailchimp-email-input" id="mce-EMAIL" placeholder="smart@cookie.com" required="">
+                <input type="submit" value="Subscribe" name="Subscribe" id="mc-embedded-subscribe" class="button subscribe-button">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
