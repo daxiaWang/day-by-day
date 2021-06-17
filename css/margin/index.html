@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .layout .a,
+    .layout .b {
+      border: 1px solid #f00;
+      margin: 10px;
+    }
+
+    .contain-b {
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0);
+    }
+
+    .c{
+      opacity: 0.4;
+      background-color: #f0f;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+    <div class="a">a</div>
+    <div class="contain-b">
+      <div class="b">b</div>
+      <div class="c">c</div>
+    </div>
+  </div>
+</body>
+
+</html>

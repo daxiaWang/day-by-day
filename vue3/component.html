@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .tab-button {
+      padding: 6px 10px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      background: #f0f0f0;
+      margin-bottom: -1px;
+      margin-right: -1px;
+    }
+
+    .tab-button:hover {
+      background: #e0e0e0;
+    }
+
+    .tab-button.active {
+      background: #e0e0e0;
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    Counter: {{counter}}
+    <p>{{message}}</p>
+    <input type="text" v-model="message" id="">
+    <button @click="debouncedClick, one($event), two($event)">反转 reverse</button>
+    <!-- <my-component class="baz"></my-component> -->
+  </div>
+  <div id="components-demo">
+    <div :style="{ fontSize: textSize + 'em' }">
+      <button-counter title="Wanger" @handle-enlarge="textSize += 0.1" is-large="true"></button-counter>
+      <button-counter title="handleEnlarge" @handle-enlarge="handleEnlarge" is-large="true"></button-counter>
+      <button-counter title="Zhangsn" @handle-shrink="textSize -= $event" :is-large="false"></button-counter>
+    </div>
+  </div>
+  <div id="custom-input">
+    <div>
+      <custom-inputa v-model="searchText">custom-inputa</custom-inputa>
+      searchTexta: {{searchText}}
+    </div>
+    <div>
+      <custom-inputb v-model="searchText">custom-inputb</custom-inputb>
+      searchTextb: {{searchText}}
+    </div>
+
+    <div>
+      <button v-for="btn in btns" :key="btn" @click="currentTab = btn"
+        :class="['tab-button', { active: currentTab === btn }]">{{btn}}</button>
+    </div>
+    <local-compa></local-compa>
+    <div>
+      <keep-alive>
+      <component 
+        :is="currentTabComponent"
+      >slot content</component>
+    </keep-alive>
+    </div>
+  </div>
+</body>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://unpkg.com/lodash@4.17.20/lodash.min.js"></script>
+<script>
+  const localCompa = {
+    template: `<h2>local Component</h2>`
+  }
+  const Mapp = Vue.createApp({
+    data() {
+      return {
+        searchText: "",
+        currentTab: "a",
+        btns: ['a', 'b', 'c']
+      }
+    },
+    components: {
+      localCompa,
+    },
+    computed: {
+      currentTabComponent() {
+        return 'custom-input' + this.currentTab
+      }
+    }
+  })
+
+  Mapp.component("custom-inputa", {
+    props: ["modelValue"],
+    emits: ["update:modelValue"],
+    template: `
+      <h3>custom-inputa</h3>
+      <input 
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+      />
+    `
+  })
+
+  Mapp.component("custom-inputb", {
+    props: ["modelValue"],
+    emits: ["update:modelValue"],
+    template: `
+    <h3>custom-inputb</h3>
+      <input 
+        v-model="value"
+      />
+    `,
+    computed: {
+      value: {
+        get() {
+          return this.modelValue
+        },
+        set(value) {
+          this.$emit('update:modelValue', value)
+        }
+      }
+    },
+  })
+
+  Mapp.component("custom-inputc", {
+    props: ["modelValue"],
+    template: `
+    <h3>custom-inputc</h3>
+    <slot></slot>
+    `
+  })
+
+  Mapp.mount("#custom-input")
+
+  const Capp = Vue.createApp({
+    data() {
+      return {
+        textSize: 1,
+        isLarge: "true"
+      }
+    },
+    methods: {
+      handleEnlarge(e) {
+        console.log("e", e)
+        console.log("e.target", e.target)
+        console.log("e.target.value", e.target.value)
+      }
+    },
+  })
+  console.log("Capp", Capp)
+
+  Capp.component('button-counter', {
+    props: {
+      title: {
+        type: String,
+        default: 'title'
+      }, 
+      isLarge: {
+        validator(value) {
+        // 这个值必须匹配下列字符串中的一个
+        return [true, false].includes(value)
+      }
+      }
+    },
+    emits: ['handleEnlarge'],
+    template: `
+      <p :class="$attrs.class">Hi! {{title}}-{{isLarge}}</p>
+      <span>This is a child component</span>
+      <div>
+        
+        <button v-if="isLarge" @click="$emit('handleEnlarge', $event)">Enlarge text</button>
+        <button v-else @click="$emit('handleShrink', 0.2)">Shrink text</button>
+      </div>
+    `
+  })
+  Capp.mount('#components-demo')
+
+  const App = {
+    data() {
+      return {
+        counter: 0,
+        message: 'Hello Vue.js',
+        textSize: 2
+      }
+    },
+    created() {
+      // 用 Lodash 的防抖函数
+      this.debouncedClick = _.debounce(this.reverseMsg, 500)
+    },
+    unmounted() {
+      // 移除组件时，取消定时器
+      this.debouncedClick.cancel()
+    },
+    mounted() {
+      setInterval(() => {
+        this.counter++
+      }, 1000);
+    },
+    methods: {
+      reverseMsg() {
+        this.message = this.message.split("").reverse().join('')
+      },
+      one(event) {
+        console.log("1")
+        // 第一个事件处理器逻辑...
+      },
+      two(event) {
+        console.log("2")
+        // 第二个事件处理器逻辑...
+      }
+    },
+  }
+
+  Vue.createApp(App).mount("#app")
+
+
+
+</script>
+
+</html>
