@@ -1,7 +1,10 @@
 import Axios from 'axios'
 import { ElMessage } from 'element-plus'
 
-const baseURL = 'http://192.168.112.119:8089/ge-submit/screen/'
+const env = import.meta.env
+// console.log("env", env)
+// console.log("process.env", import.meta.env.VITE_APP_API_BASE_URL)
+const baseURL = 'https://easy-mock.bookset.io/mock/609cd2083d39703cea415345/example'
 const axios = Axios.create({
   baseURL: baseURL,
   timeout: 20000 // 请求超时 20s

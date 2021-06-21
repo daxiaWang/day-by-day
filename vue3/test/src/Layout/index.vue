@@ -28,18 +28,21 @@ export default defineComponent({
 })
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .layout_wrap{
   width: 100%;
   height: 100%;
   border: 4px solid #000;
 }
-.layout_content
+.layout_content{
   display: flex;
-.layout_menu
+}
+.layout_menu{
   width: 120px;
   border: 2px solid #f0f;
-header
+}
+header{
   height: 59px;
   border: 2px solid #f00;
+}
 </style>

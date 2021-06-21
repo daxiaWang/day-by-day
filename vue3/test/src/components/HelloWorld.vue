@@ -35,24 +35,26 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
-import axios from '@/services/axios.ts'
+import { ref, defineComponent, getCurrentInstance } from 'vue'
+// import axios from '@/services/axios'
+import axios from '@/services/axios.ts';
 
 export default defineComponent({
   name: 'HelloWorld',
   props: {
     msg: {
       type: String,
-      required: true,
+      required: false,
     },
   },
-  setup: () => {
+  setup: (props, context) => {
+
     axios
-      .get('/middle3')
-      .then((res) => {
-        console.log('res: ', res)
+      .get('/query')
+      .then((res: any) => {
+        // console.log('res: ', res)
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.log('err: ', err)
       })
 
@@ -62,7 +64,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 a {
   color: #f00;
 }
@@ -73,9 +75,12 @@ label {
 }
 
 code {
-  background-color: #eee;
+  // background-color: #eee;
   padding: 2px 4px;
   border-radius: 4px;
   color: #304455;
+  background-color: $red;
+
+  width: calc(100% - #{$width});
 }
 </style>

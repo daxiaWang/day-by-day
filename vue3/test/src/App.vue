@@ -1,4 +1,5 @@
 <template>
+<HelloWorld />
   <router-view />
 </template>
 
