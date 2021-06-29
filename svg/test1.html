@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+    margin: 0;
+    padding: 50px 0;
+    background: #fff;
+}
+.leaf-container {
+    position: relative;
+    overflow: hidden;
+    width: 205px;
+    height: 135px;
+    margin: 0 auto;
+    background: #eee;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.leaf-icon {
+    position: absolute;
+    z-index: 1;
+    width: 205px;
+    height: 135px;
+    fill: #fff;
+}
+.leaf-fill {
+    width: 205px;
+    height: 202.5px;
+    background: #7Fbc5b;
+    /* animation: fillUp 1.5s linear infinite; */
+    transform: translate(102px, 0px);
+}
+@-webkit-keyframes fillUp {
+    0% {
+        transform: translate(0, 102px);
+    }
+    100% {
+        transform: translate(0, -102px);
+    }
+}
+@keyframes fillUp {
+    0% {
+        transform: translate(0, 102px);
+    }
+    100% {
+        transform: translate(0, -102px);
+    }
+}
+  </style>
+</head>
+<script src="https://wow.techbrood.com/libs/jquery/jquery-1.11.1.min.js"></script>
+<body>
+  <div style="display:flex;align-items:center;">
+    <div class="leaf-container">
+        <svg  class="leaf-icon" t="1624599830898" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        p-id="1864" width="200" height="200">
+        
+        <path
+          d="M512 64c247.424 0 448 200.576 448 448s-200.576 448-448 448S64 759.424 64 512 264.576 64 512 64z m0 544c-75.328 0-138.304 37.76-186.624 110.24a32 32 0 0 0 53.248 35.52C415.68 698.208 459.328 672 512 672c52.672 0 96.32 26.208 133.376 81.76a32 32 0 1 0 53.248-35.52C650.304 645.792 587.328 608 512 608z m-160-224a64 64 0 1 0 0 128 64 64 0 0 0 0-128z m320 0a64 64 0 1 0 0 128 64 64 0 0 0 0-128z"
+          fill="#d81e06" fill-rule="nonzero" p-id="1865">
+        </path>
+          
+      </svg>
+        <div class="leaf-fill"></div>
+    </div>
+</div>
+<div style="display:flex;align-items:center;">
+    <div class="leaf-container">
+        <svg class="leaf-icon" idversion="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <title></title>
+            <g class="leaf-group">
+                <path d="M0,0 L205,0 L205,135 L0,135 L0,0 Z M198.046552,5.86845094 C186.54382,2.36761966 173.540733,1.36738215 160.537645,2.36761966 C135.531707,4.86821343 113.026363,15.870826 96.5224445,32.8748637 C76.5176943,16.3709448 50.5115191,7.86892595 23.0049877,10.3695197 C16.5034439,10.8696385 10.0019001,12.3699947 4.00047502,13.870351 C2,23.3726073 1.49988125,32.3747449 2.50011875,42.37712 C6.50106879,82.3866203 33.0073627,114.394221 68.5157943,127.397308 C82.0190006,131.898377 96.5224445,133.898852 111.526007,132.898614 C118.52767,132.398496 125.529332,130.898139 132.530995,128.397546 C176.541445,113.894102 206.048452,70.883889 201.547383,23.3726073 C201.047264,17.3711823 200.047027,11.3697572 198.046552,5.86845094 Z"
+                />
+                <path d="M111.025888,121.395883 L105.024463,121.395883 C108.525295,119.395408 124.529095,103.391608 124.529095,103.391608 C149.034914,77.8855515 148.534795,67.8831764 148.534795,67.8831764 C147.034439,58.8810389 137.532182,70.883889 137.532182,70.883889 C111.025888,97.8903017 84.5195944,112.393746 84.5195944,112.393746 L84.5195944,112.393746 C84.0194756,108.892914 83.5193569,105.892202 83.5193569,102.39137 C81.0187631,55.3802076 116.527195,14.8705885 163.538358,13.3702322 C172.040376,12.8701135 180.542395,13.3702322 188.044176,15.3707073 C189.544533,20.8720136 190.54477,26.8734386 190.54477,32.3747449 C193.545483,78.885789 157.536932,118.895289 111.025888,121.395883 L111.025888,121.395883 Z"
+                />
+            </g>
+        </svg>
+        <div class="leaf-fill"></div>
+    </div>
+</div>
+
+
+</body>
+</html>

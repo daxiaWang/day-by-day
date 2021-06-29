@@ -12,17 +12,17 @@
 </template>
 
 <script>
-import SidebarItem from "./SidebarItem.vue";
-import { defineComponent, computed, ref, toRefs, reactive } from "vue";
+import SidebarItem from "./SidebarItem";
+import { defineComponent, computed, toRefs, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { routes } from "@/router";
+// import { routes } from "@/router";
 
 export default defineComponent({
   components: {
     SidebarItem,
   },
   mounted() {
-    console.log("routes", routes);
+    // console.log("routes", routes);
   },
   setup() {
     const route = useRoute();
@@ -36,7 +36,7 @@ export default defineComponent({
       }
       return path;
     });
-    console.log("route.query", router.options.routes);
+    // console.log("route.query", router.options.routes);
     const obj = reactive({
       routes: router.options.routes,
     });

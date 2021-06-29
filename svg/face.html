@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+    background: #2B2332;
+    text-align: center;
+    padding-top: 2em;
+}
+.eye-line {
+    stroke-width: 4px;
+    stroke-linecap: round;
+}
+.green {
+    fill: #BCC15B;
+    stroke: #BCC15B;
+}
+.purple {
+    fill: rgb(114, 102, 127);
+    stroke: rgb(114, 102, 127);
+}
+.lightorg {
+    fill: rgb(240, 143, 127);
+    stroke: rgb(240, 143, 127);
+}
+.nose {
+    stroke-width: 4px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    fill: none;
+}
+.mouth {
+    stroke-width: 4px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+.face:hover {
+    -webkit-animation: 2s face-animation infinite;
+    animation: 2s face-animation infinite;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+}
+svg {
+    margin-right: 5em;
+}
+circle {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    shape-rendering: optimizeQuality;
+}
+/* Face one */
+
+#svg-smile:hover circle {
+    fill: #BCC15B;
+}
+#svg-smile:hover .eye-line,
+#svg-smile:hover .nose,
+#svg-smile:hover .mouth {
+    stroke: #2B2332;
+}
+#svg-smile:hover .eye {
+    fill: #2B2332;
+}
+/* Face two */
+
+#svg-unsure:hover circle {
+    fill: rgb(114, 102, 127);
+}
+#svg-unsure:hover .eye-line,
+#svg-unsure:hover .nose,
+#svg-unsure:hover .mouth {
+    stroke: #2B2332;
+}
+#svg-unsure:hover .eye {
+    fill: #2B2332;
+}
+/* Face three */
+
+#svg-bad:hover circle {
+    fill: rgb(240, 143, 127);
+}
+#svg-bad:hover .eye-line,
+#svg-bad:hover .nose,
+#svg-bad:hover .mouth {
+    stroke: #2B2332;
+}
+#svg-bad:hover .eye {
+    fill: #2B2332;
+}
+@-webkit-keyframes face-animation {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    20% {
+        -webkit-transform: rotate(30deg);
+        transform: rotate(30deg);
+    }
+    60% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    80% {
+        -webkit-transform: rotate(-30deg);
+        transform: rotate(-30deg);
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+@keyframes face-animation {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    20% {
+        -webkit-transform: rotate(30deg);
+        transform: rotate(30deg);
+    }
+    60% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    80% {
+        -webkit-transform: rotate(-30deg);
+        transform: rotate(-30deg);
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+  </style>
+</head>
+<script src="https://wow.techbrood.com/libs/jquery/jquery-1.11.1.min.js"></script>
+<body>
+<svg width="100" height="100" id="svg-smile" class="face" xmlns="https://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="40" stroke="#BCC15B" stroke-width="4" fill="#2B2332" />
+    <line x1="60" y1="30" x2="70" y2="33" class="eye-line green" />
+    <line x1="30" y1="33" x2="40" y2="30" class="eye-line green" />
+    <circle cx="35" cy="43" r="4" fill="#BCC15B" class="eye" />
+    <circle cx="65" cy="43" r="4" fill="#BCC15B" class="eye" />
+    <polyline points="48,40 45,60 57,60 0" class="nose green"></polyline>
+    <path d="M 30 68 q 18 15 40 0" class="mouth green" />
+</svg>
+
+<svg width="100" height="100" id="svg-unsure" class="face" xmlns="https://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="40" stroke="rgb(114,102,127)" stroke-width="4" fill="#2B2332" />
+    <line x1="60" y1="30" x2="70" y2="33" class="eye-line purple" />
+    <line x1="30" y1="33" x2="40" y2="30" class="eye-line purple" />
+    <circle cx="35" cy="43" r="4" fill="rgb(114,102,127)" class="eye" />
+    <circle cx="65" cy="43" r="4" fill="rgb(114,102,127)" class="eye" />
+    <polyline points="48,40 45,60 57,60 0" class="nose purple"></polyline>
+    <line x1="40" y1="75" x2="60" y2="75" class="mouth purple" />
+</svg>
+
+<svg width="100" height="100" id="svg-bad" class="face" xmlns="https://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="40" stroke="rgb(240,143,127)" stroke-width="4" fill="#2B2332" />
+    <line x1="60" y1="30" x2="70" y2="33" class="eye-line lightorg" />
+    <line x1="30" y1="33" x2="40" y2="30" class="eye-line lightorg" />
+    <circle cx="35" cy="43" r="4" fill="rgb(240,143,127)" class="eye" />
+    <circle cx="65" cy="43" r="4" fill="rgb(240,143,127)" class="eye" />
+    <polyline points="48,40 45,60 57,60 0" class="nose lightorg"></polyline>
+    <path d="M 38 75 q 12 -10 23 0" class="mouth lightorg" />
+</svg>
+</body>
+</html>

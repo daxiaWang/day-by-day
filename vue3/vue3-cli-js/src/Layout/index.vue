@@ -5,7 +5,7 @@
   >
     <el-container>
       <el-aside :width="isCollapse ? '64px' : '210px'">
-        <h3 class="title">vue3+EPlus+ts</h3>
+        <h3 class="title">vue3+EPlus+js</h3>
         <sidebar />
       </el-aside>
       <el-container>

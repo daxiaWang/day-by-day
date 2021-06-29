@@ -26,11 +26,11 @@ import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({
   setup() {
-    const route = useRoute();
-    const router = useRouter();
-    console.log("route", route.path);
-    console.log("router", router);
-    console.log("route.query", router.options.routes)
+    // const route = useRoute();
+    // const router = useRouter();
+    // console.log("route", route.path);
+    // console.log("router", router);
+    // console.log("route.query", router.options.routes)
     return {};
   },
 });

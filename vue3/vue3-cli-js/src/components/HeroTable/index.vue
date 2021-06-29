@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 import HeroPaging from "../HeroPaging/index";
 export default defineComponent({
   components: { HeroPaging },
@@ -82,7 +82,7 @@ export default defineComponent({
       default: true,
     },
   },
-  setup(props, { emit, slots, attrs }) {
+  setup(props, { emit }) {
     let multipleSelection = [];
     const handleSelectionChange = (val) => {
       multipleSelection = val;

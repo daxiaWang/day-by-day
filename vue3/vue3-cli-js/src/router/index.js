@@ -20,7 +20,7 @@ const routes = [
     name: 'Home',
     component: Layout,
     redirect: '/home',
-    meta: { title: '基本配置', icon: 'index' },
+    meta: { title: '基本配置', icon: 'el-icon-menu' },
     children: [
       {
         path: '/home',
@@ -41,6 +41,26 @@ const routes = [
         component: () =>
           import("@/views/Test/index.vue"),
         meta: { title: 'Test', icon: 'index' },
+      }
+    ]
+  },
+  {
+    path: '/table',
+    component: Layout,
+    redirect: '/table',
+    meta: {title: '组件库', icon: 'el-icon-setting'},
+    children: [
+      {
+        path: '/table',
+        name: 'Table',
+        component: () => import('@/views/Table/index.vue'),
+        meta: { title: 'Table', icon: 'index' },
+      },
+      {
+        path: '/form',
+        name: 'Form',
+        component: () => import('@/views/Form/index.vue'),
+        meta: { title: 'Form', icon: 'index' },
       }
     ]
   },

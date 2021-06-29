@@ -48,7 +48,7 @@ import path from "path";
 import Item from "./Item.vue";
 import AppLink from "./Link.vue";
 import { isExternal } from "@/utils/validate";
-import { defineProps, ref } from "vue";
+import { ref } from "vue";
 export default {
   components: {
     'item': Item,
@@ -70,7 +70,6 @@ export default {
     },
   },
   setup(props) {
-    console.log("props", props)
     const onlyOneChild = ref(null);
     const hasOneShowingChild = (children = [], parent) => {
       const showingChildren = children.filter((item) => {
