@@ -36,6 +36,13 @@ const routes = [
         meta: { title: 'About', icon: 'index' },
       },
       {
+        path: "/todo",
+        name: "TodoList",
+        component: () =>
+          import("@/views/TodoList/index.vue"),
+        meta: { title: 'TodoList', icon: 'index' },
+      },
+      {
         path: "/test",
         name: "Test",
         component: () =>

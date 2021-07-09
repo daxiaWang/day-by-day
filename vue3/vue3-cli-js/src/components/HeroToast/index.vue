@@ -1,22 +1,28 @@
+
 <template>
-  <div>
-HeroToast
-  </div>
+
+<el-button type="text" @click="open">点击打开 Message Box</el-button>
+
 </template>
 
 <script>
-import { createApp } from "vue";
-import ToastMessage from "./index.vue";
 export default {
-  name: "HeroToast",
-  setup () {
-    
-
-    return {}
+  methods: {
+    open() {
+      this.$alert('这是一段内容', '标题名称', {
+        confirmButtonText: '确定',
+        callback: action => {
+          this.$message({
+            type: 'info',
+            message: `action: ${ action }`
+          });
+        }
+      });
+    }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
 
 </style>

@@ -17,32 +17,41 @@
 
 <script>
 import { ref, reactive, toRefs, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import pathToRegexp from 'path-to-regexp'
 
 export default {
   setup () {
     const router = useRouter();
-      console.log("router.options.routes", router.options.routes)
+    const route = useRoute();
+      console.log("route", route.matched)
+      // console.log("router.options.routes", router.options.routes)
     const obj = reactive({
       levelList: null,
-      routes: router.options.routes
+      routes: route.matched
     })
 
-    watch(() => obj.routes, { getBreadcrumb })
+// watch(() => obj.levelList, (newValue, oldValue) => {
+//   console.log("222222222")
+//   getBreadcrumb()
+// })
+    watch(() => obj.routes, () => { 
+      getBreadcrumb()
+    })
     const getBreadcrumb = () => {
+      console.log(1111111)
       // const router = useRouter()
       // only show routes with meta.title
-      const matched = obj.routes.matched.filter(item => item.meta && item.meta.title)
-      const first = matched[0]
-console.log("matched", matched)
+      const matched = obj.routes.filter(item => item.meta && item.meta.title)
+      // const first = matched[0]
+    console.log("matched", matched)
       // if (!this.isDashboard(first)) {
       //   matched = [{ path: '/dashboard', meta: { title: 'Dashboard' }}].concat(matched)
       // }
 
       obj.levelList = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
     }
-  console.log("obj", obj)
+    console.log("obj", obj)
     return {
       ...toRefs(obj),
       getBreadcrumb,

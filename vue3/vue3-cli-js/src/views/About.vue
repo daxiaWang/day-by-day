@@ -1,21 +1,7 @@
 <template>
-  <HeroTable
-    :allowSelect="true"
-    :data="tableData"
-    :columns="columns"
-    @select="handleSelect"
-    @pagingChange="handlePagingChange"
-  >
-    <template v-slot:dateHeader>
-      <el-tag type="success">日期</el-tag>
-    </template>
-    <template v-slot:date="scope"> {{ scope.data.date }}自定义slot </template>
-    <template v-slot:action="scope">
-      <span class="btn" @click="handleCLick('edit', scope.data)">编辑</span>
-      <el-divider direction="vertical"></el-divider>
-      <span class="btn red" @click="handleCLick('del', scope.data)">删除</span>
-    </template>
-  </HeroTable>
+  <div>
+    <h2>todo list</h2>
+  </div>
 </template>
 <script>
 import { defineComponent, reactive, toRefs } from "vue";
