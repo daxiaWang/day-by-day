@@ -7,8 +7,12 @@
   </el-breadcrumb> -->
   <el-breadcrumb class="app-breadcrumb" separator="/">
     <transition-group name="breadcrumb">
-      <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.path">
-        <span v-if="item.redirect==='noRedirect'||index==levelList.length-1" class="no-redirect">{{ item.meta.title }}</span>
+      <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
+        <span
+          v-if="item.redirect === 'noRedirect' || index == levelList.length - 1"
+          class="no-redirect"
+          >{{ item.meta.title }}</span
+        >
         <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
       </el-breadcrumb-item>
     </transition-group>
@@ -16,48 +20,51 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, watch } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import pathToRegexp from 'path-to-regexp'
+import { ref, reactive, toRefs, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import pathToRegexp from "path-to-regexp";
 
 export default {
-  setup () {
-    const router = useRouter();
-    const route = useRoute();
-      console.log("route", route.matched)
-      // console.log("router.options.routes", router.options.routes)
-    const obj = reactive({
-      levelList: null,
-      routes: route.matched
-    })
-
-// watch(() => obj.levelList, (newValue, oldValue) => {
-//   console.log("222222222")
-//   getBreadcrumb()
-// })
-    watch(() => obj.routes, () => { 
-      getBreadcrumb()
-    })
+  setup() {
+    const levelList = ref(null);
+    const router = useRouter(); //是VueRouter的一个对象，这个对象中是一个全局的对象，他包含了所有的路由包含了许多关键的对象和属性。
+    const route = useRoute();  //路由跳转对象，每一个路由都会有一个route对象，是一个局部的对象，可以获取对应的name,path,params,query等
+    console.log("route", route);
+    console.log("router", router);
+  
     const getBreadcrumb = () => {
-      console.log(1111111)
-      // const router = useRouter()
-      // only show routes with meta.title
-      const matched = obj.routes.filter(item => item.meta && item.meta.title)
-      // const first = matched[0]
-    console.log("matched", matched)
-      // if (!this.isDashboard(first)) {
-      //   matched = [{ path: '/dashboard', meta: { title: 'Dashboard' }}].concat(matched)
-      // }
+      let matched = route.matched.filter(
+        (item) => item.meta && item.meta.title
+      );
 
-      obj.levelList = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
-    }
-    console.log("obj", obj)
+      const first = matched[0];
+      if (first.path !== "/") {
+        matched = [{ path: "/home", meta: { title: "首页" } }].concat(matched);
+      }
+
+      levelList.value = matched.filter(
+        (item) => item.meta && item.meta.title && item.meta.breadcrumb !== false
+      );
+      console.log("levelList", levelList.value);
+    };
+
+    const handleLink = (item) => {
+      const { redirect, path } = item;
+      if (redirect) {
+        router.push(redirect);
+        return;
+      }
+      router.push(path);
+    };
+
+    getBreadcrumb();
+    watch(route, getBreadcrumb);
     return {
-      ...toRefs(obj),
-      getBreadcrumb,
-    }
-  }
-}
+      levelList,
+      handleLink,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>color拾取器</title>
+</head>
+<body>
+  <input type="color" id="color">
+</body>
+<script>
+  document.querySelector("#color").onchange = function () {
+    document.getElementById('color').click(); // 必须添加触发click事件否则不能通过点击确定按钮触发更改颜色
+    document.body.style.background = this.value;
+  }
+</script>
+</html>
