@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  var treeList = [
+    {
+      id: 0,
+      label: 'root',
+      children: [
+        { id: 1, label: '1-1', children: null },
+        { id: 2, label: '1-2', children: null },
+        { id: 3, label: '1-3', children: null }
+      ]
+    },
+    {
+      id: 20,
+      label: 'root1',
+      children: [
+        {
+          id: 21,
+          label: '2-1',
+          children: [{
+            id: 30,
+            label: 'root3',
+            children: [
+              { id: 31, label: '3-1', children: null },
+              { id: 32, label: '3-2', children: null },
+              { id: 33, label: '3-3', children: null }
+            ]
+          }]
+        },
+        { id: 22, label: '2-2', children: null },
+        { id: 23, label: '2-3', children: null }
+      ]
+    }
+  ]
+  // @输入参数 list: 需要扁平化的树形结构数组，默认按children字段扁平展开
+  // @输出：返回别扁平化的数组
+  function platFn(list) {
+    let res = []
+    res = list.concat(...list.map(item => {
+      if (item.children instanceof Array && item.children.length > 0) {
+        return platFn(item.children)
+      }
+      return null
+    }).filter(o => o instanceof Array && o.length > 0))
+    return res
+  }
+  var platList = platFn(treeList)
+  console.log(platList)
+  console.log('id: 32==>', platList.find(item => item.id == 32))
+
+
+  //   @输入参数 id： 要查找数据对应的id
+  // @输入参数 list： 要查询的树形结构数组
+  // @输出：返回该数据或null
+  function findItemById(id, list) {
+    let res = list.find(item => item.id == id)
+    if (res) {
+      return res
+    } else {
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].children instanceof Array && list[i].children.length > 0) {
+          res = findItemById(id, list[i].children)
+          if (res) {
+            return res
+          }
+        }
+      }
+      return null
+    }
+  }
+  console.log(findItemById(32, treeList))  // {id: 32, label: "3-2", children: null}
+  console.log(findItemById(30, treeList))  // null
+</script>
+
+</html>
