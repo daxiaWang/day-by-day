@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <!-- 开启 safe-area-inset-bottom 属性 -->
+    <van-number-keyboard safe-area-inset-bottom />
+    <!--强制竖屏-->
+    <meta name="screen-orientation" content="portrait" />
+    <!--删除默认的苹果工具栏和菜单栏-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!--全屏-->
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+    
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <script src="<%= BASE_URL %>config/config2.js"></script>
+    <!-- <script src="<%= BASE_URL %>config/cordova.js"></script> -->
+    <!-- <script src="../../cordova.js"></script>
+    <script src="../../cordova_plugins.js"></script> -->
+    <!-- <script src="https://api.map.baidu.com/api?v=2.0&ak=Bbh9zckMhnp8OAHXK4SDFjOppFlqpkWw"></script> -->
+    <!-- <title>
+        <%= webpackConfig.name %>
+    </title> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+    <script>
+        var vConsole = new VConsole();
+        console.log('Hello world');
+    </script> -->
+</head>
+
+<body>
+    <noscript>
+    <strong>We're sorry but <%= webpackConfig.name %> doesn't work properly without JavaScript enabled.
+      Please enable it to continue.</strong>
+  </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path id="dengdai" class="cls-1" d="M70.995,64a7,7,0,1,0,7,7A7,7,0,0,0,70.995,64Zm2.447,8.4H70.692a.35.35,0,0,1-.4-.346V66.8a.352.352,0,0,1,.7,0v4.9h2.447a.348.348,0,1,1,0,.7Z" transform="translate(-63.995 -64)"/>
+</svg>

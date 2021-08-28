@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  let arrTem = [
+    { title: "所属部门", description: "智慧政企事业部-产品开发部" },
+    { title: "性别", description: "女" },
+    { title: "手机号", description: "1.8281818E7" },
+    { title: "入职时间", description: "40179.0" },
+    { title: "身份证号", description: "222222.0" },
+    { title: "档案银行账号", description: "11111.0" },
+    { title: "职务", description: "经理" }
+  ]
+  let objArr = {}
+  arrTem.forEach(item => {
+    objArr[item.title] = item.description
+  })
+  console.log("objArr", objArr)
+</script>
+
+</html>

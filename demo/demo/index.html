@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<template id="mybutton">
+    <style>
+        button {
+            width: auto;
+            height: 30px;
+            cursor: pointer;
+            color: blue;
+            border: 0;
+            border-radius: 5px;
+            background-color: #F0F0F0;
+        }
+    </style>
+    <button id="btn">Add</button>
+    <p><slot name="my-text">My Default Text</slot></p>
+</template>
+
+<div>我是个分割用的分割线，下面的dom结构可以用在调用方的代码里**********************</div>
+<my-button text="hello">
+    <p>Another Text from outside</p>
+</my-button>
+
+
+<script>
+    // WebComponent 实例
+    class MyButton extends HTMLElement {
+        constructor () {
+            super();
+            const template = document.getElementById('mybutton'); // 获取dom节点
+            const content = template.content.cloneNode(true); // 深度克隆dom节点，使组件可以用在不同的地方并且相互之间不影响
+            const text = this.getAttribute('text');
+            const button = content.querySelector('#btn');
+            this.$button = button; // 把按钮对象挂载到this上
+            button.innerText = text;
+            const event = new CustomEvent('onClick', { // 生成新的自定义事件️
+                detail: 'Hello fom within the Custom Element', // 可选的默认值是 null 的任意类型数据，是一个与 event 相关的值
+                bubbles: false, // 表示该事件能否冒泡
+                cancelable: false // 表示该事件是否可以取消
+            })
+            button.addEventListener('click', e => {
+                this.dispatchEvent(event) // 在按钮被点击的时候，触发自定义事件
+            })
+            // this.appendChild(content); // 添加元素
+            this.attachShadow({ mode: 'open' }).appendChild(content);
+        }
+
+        // 静态get函数，它的作用是定义那些属性需要被监听
+        static get observedAttributes() {
+            return ['text'];
+        }
+
+        // 监听text属性变化
+        get text () {
+            return this.getAttribute('text');
+        }
+
+        // 赋值text属性
+        set text (value) {
+            this.setAttribute('text', value);
+        }
+
+        /**
+         属性变化时的回调函数，也就是说，每一个被监听的属性，只要属性值发生变化，都会调用这个函数；
+         顺便说一下webComponents的生命周期
+         1. connectedCallback
+         当web component被添加到DOM时，会调用这个回调函数，这个函数只会被执行一次。可以在这个回调函数中完成一些初始化操作，比如更加参数设置组件的样式。
+         2. disconnectedCallback
+         当web component从文档DOM中删除时执行。
+         3. adoptedCallback
+         当web component被移动到新文档时执行。
+         4. attributeChangedCallback
+         被监听的属性发生变化时执行。
+         */
+        attributeChangedCallback(name, oldVal, newVal) {
+            this.render();
+        }
+
+        // 渲染函数，属性更新后，如果要重新渲染组件，就要调用这个函数。
+        render() {
+            this.$button.innerText = this.text;
+        }
+    }
+
+
+    window.customElements.define('my-button', MyButton);
+
+
+    // 这俩需要带在调用方的组件里
+    const mybutton = document.querySelector('my-button')
+
+    mybutton.addEventListener('onClick', (value) => {
+        console.log(value.detail);
+        mybutton.text = value.detail
+    });
+
+
+</script>
+</body>
+</html>

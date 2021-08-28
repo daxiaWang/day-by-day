@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .svg {
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      display: block;
+      background: #2f3439;
+    }
+
+    .mycircle {
+      fill: none;
+      stroke-width: 35px;
+      stroke: #fffde8;
+      stroke-dasharray: 76px;
+      stroke-linecap: round;
+      animation: lineMove 4s ease-in-out 0s infinite;
+    }
+
+    @keyframes lineMove {
+      0% {
+        stroke-dasharray: 0, 760
+      }
+
+      60% {
+        stroke-dasharray: 760, 760
+      }
+
+      100% {
+        stroke-dasharray: 760, 760
+      }
+    }
+
+    .circular {
+      height: 42px;
+      width: 42px;
+      animation: loading-rotate 2s linear infinite;
+    }
+
+    .path {
+      animation: loading-dash 1.5s ease-in-out infinite;
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: 0;
+      stroke-width: 2;
+      stroke: #409eff;
+      stroke-linecap: round;
+    }
+
+    @keyframes loading-dash {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+      }
+
+      50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -40px;
+      }
+
+      100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -120px;
+      }
+    }
+
+    @keyframes loading-rotate {
+      100% {
+        transform: rotate(1turn);
+      }
+    }
+
+    .el-icon-loading {
+      color: #409eff;
+      animation: rotating 2s linear infinite;
+    }
+
+    .el-icon-loading:before {
+      content: "q";
+    }
+
+    @keyframes rotating {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(1turn);
+      }
+    }
+
+
+    .wrapper {
+    height: 100vh;
+    width: 100vw;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.wrapper .circle {
+    stroke-dasharray: 10 500;
+    stroke-alignment: inner;
+}
+.wrapper .rotate {
+    -webkit-animation-name: rotate;
+    animation-name: rotate;
+    -webkit-animation-duration: 1.1s;
+    animation-duration: 1.1s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+    -webkit-animation-direction: normal;
+    animation-direction: normal;
+    -webkit-animation-play-state: running;
+    animation-play-state: running;
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+}
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotateZ(0deg);
+        transform: rotateZ(0deg);
+    }
+    100% {
+        -webkit-transform: rotateZ(360deg);
+        transform: rotateZ(360deg);
+    }
+}
+@keyframes rotate {
+    0% {
+        -webkit-transform: rotateZ(0deg);
+        transform: rotateZ(0deg);
+    }
+    100% {
+        -webkit-transform: rotateZ(360deg);
+        transform: rotateZ(360deg);
+    }
+}
+.stroke-spacing {
+    -webkit-animation-name: stroke-spacing;
+    animation-name: stroke-spacing;
+    -webkit-animation-duration: 6.6s;
+    animation-duration: 6.6s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+    -webkit-animation-direction: normal;
+    animation-direction: normal;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-play-state: running;
+    animation-play-state: running;
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+}
+@-webkit-keyframes stroke-spacing {
+    0% {
+        stroke-dasharray: 0 500;
+    }
+    90% {
+        stroke-dasharray: 330 500;
+    }
+    100% {
+        stroke-dasharray: 330 500;
+    }
+}
+@keyframes stroke-spacing {
+    0% {
+        stroke-dasharray: 0 500;
+    }
+    90% {
+        stroke-dasharray: 330 500;
+    }
+    100% {
+        stroke-dasharray: 330 500;
+    }
+}
+  </style>
+</head>
+
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" class="svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- 外圆 -->
+    <circle class="" cx="150" cy="150" r="150" fill="#5d6771" />
+    <!-- 内圆 -->
+    <circle class="" cx="150" cy="150" r="90" fill="#2f3439" />
+    <!-- 圆形路径（动画本体） -->
+    <circle class="mycircle" cx="150" cy="150" r="120" />
+  </svg>
+
+  <div>
+    <svg viewBox="25 25 50 50" class="circular">
+      <circle cx="50" cy="50" r="20" fill="none" class="path"></circle>
+    </svg>
+  </div>
+
+  <div>
+    <i class="el-icon-loading"></i>
+  </div>
+
+  <div class="wrapper">
+    <svg class="rotate" height="110" width="110">
+        <circle class="circle rotate stroke-spacing" cx="55" cy="55" r="50" stroke="rgb(0,170,210)" stroke-width="8" fill="none" />
+    </svg>
+</div>
+</body>
+
+</html>

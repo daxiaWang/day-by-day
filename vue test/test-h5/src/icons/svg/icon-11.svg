@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #3296fa;
+      }
+    </style>
+  </defs>
+  <g id="choosecar100" transform="translate(-188.12 -188.123)">
+    <path id="路径_66" data-name="路径 66" class="cls-1" d="M543.209,189.307h8.25v8.3h-8.25Z" transform="translate(-345.339 -1.151)"/>
+    <path id="路径_67" data-name="路径 67" class="cls-1" d="M543.209,541.488h8.25v8.3h-8.25Z" transform="translate(-345.339 -343.663)"/>
+    <path id="路径_68" data-name="路径 68" class="cls-1" d="M188.123,541.488h8.25v8.3h-8.25Z" transform="translate(-0.003 -343.663)"/>
+    <path id="路径_69" data-name="路径 69" class="cls-1" d="M192.447,196.373h-.4a3.923,3.923,0,0,1-3.923-3.923v-.4a3.923,3.923,0,0,1,3.923-3.923h.4a3.923,3.923,0,0,1,3.923,3.923v.4a3.923,3.923,0,0,1-3.923,3.923" transform="translate(0 0)"/>
+    <path id="路径_70" data-name="路径 70" class="cls-1" d="M188.123,329.691h8.25v4.259h-8.25Z" transform="translate(-0.003 -137.651)"/>
+    <path id="路径_71" data-name="路径 71" class="cls-1" d="M334.1,188.123h4.135v8.25H334.1Z" transform="translate(-141.945 0)"/>
+  </g>
+</svg>

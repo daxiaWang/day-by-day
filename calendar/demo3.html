@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #2c3e50;
+        }
+
+        .calendar {
+            width: 400px;
+            margin: 50px auto;
+        }
+
+        .calendar-tip {
+            font-size: 16px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .prev {
+            float: left;
+            cursor: pointer;
+        }
+
+        .next {
+            float: right;
+            cursor: pointer;
+        }
+
+        .calendar-month {
+            text-align: center;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+        }
+
+        li {
+            width: 57px;
+            text-align: center;
+            height: 55px;
+            line-height: 55px;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .calendar-day {
+            display: flex;
+        }
+
+        .calendar-day span {
+            flex: 1;
+            color: #fff;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+
+        }
+
+        .calendar-data {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        li {
+            width: 57px;
+            cursor: pointer;
+        }
+
+        li:hover {
+            background: #2d3436;
+        }
+
+        .calendar-data .choosed {
+            color: #d63031;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calendar">
+        <div class="calendar-tip">
+            <span class="prev">上一月</span>
+            <em id="year">2022年</em>
+            <span class="next">下一月</span>
+        </div>
+        <div class="calendar-month">五月</div>
+        <div class="calendar-day">
+            <span>日</span>
+            <span>一</span>
+            <span>二</span>
+            <span>三</span>
+            <span>四</span>
+            <span>五</span>
+            <span>六</span>
+        </div>
+        <ul class="calendar-data">
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+        </ul>
+    </div>
+    <script>
+
+        var attendMonth = '2021-08'
+        var stDt = '2021-08-24';
+        var endDt = '2021-09-20';
+
+        var date = new Date(attendMonth);
+        var stDtDate = new Date(stDt)
+        var endDtDate = new Date(endDt)
+        console.log("\ninit date", date, "\ninit stDtDate", stDtDate, "\ninit endDtDate", endDtDate)
+
+        var year = document.querySelector("#year");
+        var month = document.querySelector(".calendar-month");
+        var calendarData = document.querySelector(".calendar-data");
+        var prev = document.querySelector(".prev");
+        var next = document.querySelector(".next");
+        var monthArr = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"];
+
+        var y, m, day, d, html, today;
+        calendar();
+
+        function calendar() {
+            y = date.getFullYear();
+            year.innerHTML = y + "年";
+
+            m = date.getMonth();
+            month.innerHTML = monthArr[m];
+            
+            day = new Date(stDtDate).getDay(); //获取每个月第一天是周几
+            // d = new Date(y, m + 1, -1).getDate() + 1; //获取多少天
+            d = getDateSolt(dateFormat("YYYY-mm-dd", stDtDate), dateFormat("YYYY-mm-dd", endDtDate))//计算日历上需要展示的天数
+            html = "";
+
+            //把每个月第一天之前的时间填充为空
+            for (var i = 0; i < day; i++) {
+                html += "<li> </li>";
+            }
+
+            for (var j = 0; j <= d.length - 1; j++) {
+                var choosedClass = ''
+                if (d[j].year==new Date().getFullYear() && d[j].month==new Date().getMonth()+1 && d[j].date== new Date().getDate()) {
+                    choosedClass = "day choosed"
+                } else {
+                    choosedClass = "day"
+                }
+                html += "<li class='" + choosedClass + "'>" + d[j].date + "</li>";
+            }
+            calendarData.innerHTML = html;
+        }
+
+        prev.onclick = function () {
+            date.setMonth(date.getMonth() - 1);
+            stDtDate.setMonth(stDtDate.getMonth() - 1);
+            endDtDate.setMonth(endDtDate.getMonth() - 1);
+            calendar();
+        }
+
+        next.onclick = function () {
+            date.setMonth(date.getMonth() + 1);
+            stDtDate.setMonth(stDtDate.getMonth() + 1);
+            endDtDate.setMonth(endDtDate.getMonth() + 1);
+            calendar();
+        }
+
+        function dateFormat(fmt, date) {
+            let ret;
+            const opt = {
+                "Y+": date.getFullYear().toString(),        // 年
+                "m+": (date.getMonth() + 1).toString(),     // 月
+                "d+": date.getDate().toString(),            // 日
+                "H+": date.getHours().toString(),           // 时
+                "M+": date.getMinutes().toString(),         // 分
+                "S+": date.getSeconds().toString()          // 秒
+                // 有其他格式化字符需求可以继续添加，必须转化成字符串
+            };
+            for (let k in opt) {
+                ret = new RegExp("(" + k + ")").exec(fmt);
+                if (ret) {
+                    fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+                };
+            };
+            return fmt;
+        }
+        //根据开始日期和结束日期获取所有日期的方法
+        /**
+         * startDay 开始日期 格式 '2021-08-25'
+         * endDay 结束日期 格式 '2021-09-25'
+         * isStart 输出数组是否包含开始日期
+         * isEnd 输出数组是否包含结束日期 
+        */
+        function getDateSolt(startDay, endDay, isStart = true, isEnd = true) {
+            var getDate = function (str) {
+                var tempDate = new Date();
+                var list = str.split("-");
+                tempDate.setFullYear(list[0]);
+                tempDate.setMonth(list[1] - 1);
+                tempDate.setDate(list[2]);
+                return tempDate;
+            }
+            var date1 = getDate(startDay);
+            var date2 = getDate(endDay);
+            if (date1 > date2) {
+                var tempDate = date1;
+                date1 = date2;
+                date2 = tempDate;
+            }
+            if (!isStart) {
+                date1.setDate(date1.getDate() + 1);
+            }
+            if (isEnd) {
+                date2.setDate(date2.getDate() + 1);
+            }
+            var dateArr = [];
+            var i = 0;
+            while (!(date1.getFullYear() == date2.getFullYear() && date1.getMonth() == date2.getMonth() && date1.getDate() == date2.getDate())) {
+                var dayStr = date1.getDate().toString();
+                if (dayStr.length == 1) {
+                    dayStr = "0" + dayStr;
+                }
+                var dateItem = {
+                    name: date1.getFullYear() + "-" + (date1.getMonth() + 1) + "-" + dayStr,
+                    index: i,
+                    year: date1.getFullYear(),
+                    month: date1.getMonth() + 1,
+                    date: dayStr,
+                    day: date1.getDay()
+                }
+                // dateArr[i] = date1.getFullYear() + "-" + (date1.getMonth() + 1) + "-" + dayStr;
+                dateArr[i] = dateItem
+                i++;
+                date1.setDate(date1.getDate() + 1);
+            }
+            console.log("dateArr", dateArr)
+            return dateArr;
+        }
+  // console.log("getDateSolt('2021-07-15', '2021-08-15')" , getDateSolt('2021-07-15', '2021-08-15'))
+    </script>
+</body>
+
+</html>

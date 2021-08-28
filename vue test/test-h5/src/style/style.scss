@@ -1,0 +1,59 @@
+.orderTransfer,
+.endTripWrap {
+    .van-field__control {
+        border: 1px solid #c9c9c9;
+        border-radius: 4px;
+        padding: 1px 10px;
+    }
+}
+
+.mine,
+.login {
+    .van-field__control {
+        // border-bottom: 1px solid #c9c9c9;
+        padding: 1px 10px;
+    }
+}
+
+.van-tabs__line {
+    background: linear-gradient(129deg, #98ccff 0%, #3296fa 100%) !important;
+}
+
+.orderTransfer {
+    .van-cell {
+        padding-right: 0;
+    }
+}
+
+.vehicleDispatch {
+    .van-pull-refresh,
+    .van-pull-refresh__track {
+        min-height: calc(100vh - 138px);
+    }
+}
+
+.myOrder {
+    .van-pull-refresh,
+    .van-pull-refresh__track {
+        min-height: calc(100vh - 92px);
+    }
+}
+
+.nameList {
+    .van-pull-refresh,
+    .van-pull-refresh__track {
+        min-height: calc(100vh - 56px);
+    }
+}
+
+// .screen__wrap-content {
+//     .van-cell {
+//         width: 100%;
+//         padding-left: 10px;
+//         padding-right: 0px;
+//         .van-cell__title {
+//             width: 100px;
+//             border: 1px solid;
+//         }
+//     }
+// }

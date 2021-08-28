@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>文档标题</title>
+</head>
+ 
+<body>
+    <zf-button type="primary">我的按钮</zf-button>
+    <zf-button type="default">我的按钮</zf-button>
+ 
+    <template id="btn">
+        <button class="zf-button">
+            <slot>默认按钮</slot>
+        </button>
+    </template>
+ 
+    <script>
+        class ZfButton extends HTMLElement {
+            constructor() {
+                super();
+                let shadow = this.attachShadow({ mode: 'open' })
+                let btnTmpl = document.getElementById('btn');
+ 
+                let cloneTemplate = btnTmpl.content.cloneNode(true);
+ 
+                const style = document.createElement('style');
+                let type=this.getAttribute('type') || 'default';
+                const btnList={
+                    'primary':{
+                        background:'#409eff',
+                        color:'#fff'
+                    },
+                    'default':{
+                        background:'#909090',
+                        color:'#fff'
+                    }
+                }
+ 
+                style.textContent = `
+                    .zf-button{
+                        border:none;
+                        outline:none;
+                        border-radius:4px;
+                        padding:5px 10px;
+                        background:${btnList[type].background};
+                        color:${btnList[type].color}
+                    }
+                `
+                
+                // dom操作具备移动型
+                shadow.appendChild(style);
+                shadow.appendChild(cloneTemplate);
+            }
+        }
+        window.customElements.define('zf-button', ZfButton);
+        // 必须用中横线连接
+        /**
+         *  Custom elements
+         *  shadow DOM 可以实现完全的隔离
+         *  HTML templates
+         *  独立的组件  webComponent
+         *
+         * **/
+    </script>
+</body>
+ 
+</html>

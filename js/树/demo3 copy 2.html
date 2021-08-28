@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  let tree = [
+    {
+      "id": "ecard_area_id_0",
+      "type": "campus",
+      "title": "主分区-1",
+      "children": [
+        {
+          "CAMPUSID": "ecard_area_id_0",
+          "id": "4028098174a10dc40174a12cca40022c",
+          "type": "park",
+          "title": "桃园-2",
+          "children": [
+            {
+              "id": "4028098174a10dc40174a12da3030254",
+              "PARKID": "4028098174a10dc40174a12cca40022c",
+              "type": "build",
+              "ISUNIT": 2,
+              "title": "2号单元楼-3",
+              "children":
+                [
+                  // {
+                  //   "id": "4028098174a10dc40174a12e09e10271",
+                  //   "type": "unit",
+                  //   "BUILDINGID": "4028098174a10dc40174a12da3030254",
+                  //   "title": "1单元-4"
+                  // },
+                  // {
+                  //   "id": "4028b3c07abcee03017abd82f85b0096",
+                  //   "type": "unit",
+                  //   "BUILDINGID": "4028098174a10dc40174a12da3030254",
+                  //   "title": "测试单元-4"
+                  // }
+                ]
+            }
+          ]
+        }, {
+          "CAMPUSID": "ecard_area_id_0",
+          "id": "4028b3c07abcee03017abd7cb567003c",
+          "type": "park",
+          "title": "测试园区-2",
+          "children": [
+            {
+              "id": "4028b3c07abcee03017abd7d97d50058",
+              "PARKID": "4028b3c07abcee03017abd7cb567003c",
+              "type": "build",
+              "ISUNIT": 2,
+              "title": "测试楼宇-3",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ecard_area_id_1",
+      "type": "campus",
+      "title": "西区-1",
+      "children": [
+        {
+          "CAMPUSID": "ecard_area_id_1",
+          "id": "4028b3c07abcee03017abd7a72190017",
+          "type": "park",
+          "title": "西区园区-2",
+          "children": [
+            {
+              "id": "4028098174a10dc40174a12d1b17023e",
+              "PARKID": "4028b3c07abcee03017abd7a72190017",
+              "ISUNIT": 1,
+              "title": "1号楼-3",
+              "type": "build",
+              "children": [
+                {
+                  "id": "4028098174a10dc40174adw209e10271",
+                  "type": "unit",
+                  "BUILDINGID": "4028098174a10dc40174a12d1b17023e",
+                  "title": "1号2单元-4",
+                  "build": '1号楼-3',
+                  "park": '西区园区-2',
+                  "campus": '西区-1'
+                },
+                {
+                  "id": "4028b3c07abcee03017abd322ef85b0096",
+                  "type": "unit",
+                  "BUILDINGID": "4028098174a10dc40174a12d1b17023e",
+                  "title": "1号测试单元-4"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+
+
+
+
+
+  function filtermap(node) {
+        console.log("node", node)
+
+            if (node.ISUNIT) {
+                if (node.ISUNIT === 2) {
+                    console.log("node.ISUNIT === 2", node)
+                    return node
+                } else if (node.ISUNIT === 1) {
+                    console.log("node.ISUNIT === 1", node)
+                    // node = node.children && node.children[0] || '没有child'
+                    return node.children && node.children[0] || '没有child'
+                }
+            } else {
+                filtermap(node.children[0])
+            }
+    }
+let resultNode=filtermap(tree);
+console.log("resultNode", resultNode)
+</script>
+
+</html>

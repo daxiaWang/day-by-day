@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  /**
+ * [monthSize 获得指定日期所在月的天数]
+ * @param  {[Date]} oDate [指定的日期，非必填，默认为当天]
+ * @return {[Int]}       [总天数]
+ */
+  function monthSize(oDate) {
+    oDate = oDate ? oDate : new Date();
+    let year = oDate.getFullYear(),
+      month = oDate.getMonth(),
+      _oDate = new Date();
+    _oDate.setFullYear(year);
+    _oDate.setMonth(month + 1, 0);
+    return _oDate.getDate();
+  }
+  /**
+ * [getCalendarMonth 获得指定日期所在月的第一周到第四/五周的数据组合，形如：
+ * [{
+    "date": "2016/10/30", //日期字符串
+    "dateNum": 30,  //日
+    "isCurMonth": false, //是否当前月
+    "weekIndex": 0 //是本月的第几周，下标从0开始
+  },{
+    "date": "2016/10/31",
+    "dateNum": 31,
+    "isCurMonth": false,
+    "weekIndex": 0
+  },{
+    "date": "2016/11/1",
+    "dateNum": 1,
+    "day": 2,
+    "isCurMonth": true,
+    "isToday": false,
+    "weekIndex": 0
+  }]
+  ]
+ * @param  {[Date]} param [指定的日期，非必填，默认为当天]
+ * @return {[Array]}       [获得指定日期所在月的第一周到第四/五周的数据组合]
+ */
+
+  function getCalendarMonth(date) {
+    date = date ? date : new Date();
+    let y = date.getFullYear();
+    let m = date.getMonth();
+    let _m;
+    let firstDay = new Date(y, m, 1).getDay(); //当月第一天 周期
+    let days = monthSize(date);//当月天数
+    let prevMonthDays = monthSize(new Date(y, m - 1));//上月天数
+    let initPrevDay = prevMonthDays - firstDay;
+    let lines = Math.ceil((firstDay + days) / 7);
+    _m = new Array(lines * 7);
+    let nextMonthDay = 0;
+
+    for (let i = 0; i < _m.length; i++) {
+      let weekIndex = parseInt(i / 7);
+      if (i < firstDay) {
+        let date = ++initPrevDay;
+        if (m === 0 && date > 7) {
+          _m[i] = {
+            isCurMonth: false,
+            dateNum: date,
+            weekIndex,
+            date: `${y - 1}/${12}/${date}`
+          };
+        } else {
+          _m[i] = {
+            isCurMonth: false,
+            dateNum: date,
+            weekIndex,
+            date: `${y}/${m}/${date}`
+          };
+        }
+      } else if (i >= (firstDay + days)) {
+        let date = ++nextMonthDay;
+
+        if (m === 11 && date <= 7) {
+          _m[i] = {
+            isCurMonth: false,
+            dateNum: date,
+            weekIndex,
+            date: `${y + 1}/${1}/${date}`
+          };
+        } else {
+          _m[i] = {
+            isCurMonth: false,
+            dateNum: date,
+            weekIndex,
+            date: `${y}/${m + 2}/${date}`
+          };
+        }
+      } else {
+        let _date = i - firstDay + 1;
+        let today = new Date();
+        let today_y = today.getFullYear();
+        let today_m = today.getMonth();
+        let today_d = today.getDate();
+        let isToday = today_y === y && today_m === m && today_d === _date ? true : false;
+        _m[i] = {
+          dateNum: _date, //日期
+          day: i % 7, //周期
+          weekIndex,
+          isCurMonth: true,
+          isToday,
+          date: `${y}/${m + 1}/${_date}`
+        };
+      }
+    }
+    return _m;
+  }
+  console.log('getCalendarMonth(new Date("2021-07-15")', getCalendarMonth(new Date("2021-07-15")))
+
+  //根据开始日期和结束日期获取所有日期的方法
+  function get(day1, day2) {
+    var getDate = function (str) {
+      var tempDate = new Date();
+      var list = str.split("-");
+      tempDate.setFullYear(list[0]);
+      tempDate.setMonth(list[1] - 1);
+      tempDate.setDate(list[2]);
+      return tempDate;
+    }
+    var date1 = getDate(day1);
+    var date2 = getDate(day2);
+    if (date1 > date2) {
+      var tempDate = date1;
+      date1 = date2;
+      date2 = tempDate;
+    }
+    date1.setDate(date1.getDate() + 1);
+    var dateArr = [];
+    var i = 0;
+    while (!(date1.getFullYear() == date2.getFullYear()
+      && date1.getMonth() == date2.getMonth() && date1.getDate() == date2
+        .getDate())) {
+      var dayStr = date1.getDate().toString();
+      if (dayStr.length == 1) {
+        dayStr = "0" + dayStr;
+      }
+      dateArr[i] = date1.getFullYear() + "-" + (date1.getMonth() + 1) + "-"
+        + dayStr;
+      i++;
+      /* 
+       * document.write("<div style='display:block'>" + date1.getFullYear() + 
+       * "-" + (date1.getMonth() + 1) + "-" + date1.getDate() + "</div>"); 
+       */
+      // document.write(dateArr[i] + "<br>");  
+      date1.setDate(date1.getDate() + 1);
+    }
+    dateArr.splice(0, 0, day1)
+    dateArr.push(day2);
+    return dateArr;
+  }
+  console.log("get('2021-07-15', '2021-08-15')" , get('2021-07-15', '2021-08-15'))
+</script>
+
+</html>
