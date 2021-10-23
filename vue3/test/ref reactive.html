@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h3>ref、reactive 可触发页面改变</h3>
+    <p>
+      ref可用于任何类型的数据创建响应式，reactive只用于创建引用类型数据的响应式。
+    </p>
+    <p>
+      不可使用解构的方式定义响应式变量，会破坏响应性。<br>
+不能把新对象直接赋值给变量，因为也会破坏响应性。
+    </p>
+    <div>
+      <button @click="add">add</button>
+      <span>count - {{count}}</span>
+      <button @click="minus">minus</button>
+    </div>
+    <div>
+      <save-button>111</save-button>
+    </div>
+    <div>
+      <button @click="handlePlus">plus</button> newCount{{newCount}}
+    </div>
+
+    <div>
+      <div>inputValue:{{inputValue}}</div>
+      <input type="text" @input="inputRefHandle" v-model="inputValue">
+      <div>
+        <span @click="handleClickNum(item)" v-for="item in newArr" :key="item" style="padding: 10px;">
+          {{ item }}
+        </span>
+      </div>
+    </div>
+
+    <hr>
+    <hr>
+
+    <div>
+      state.count-{{state.count}}
+      <br>
+      <input type="text" @input="inputReactiveHandle" v-model="state.count">
+    </div>
+    <div>
+      state {{state.count}}
+    </div>
+
+    <hr>
+    <hr>
+
+    <ul>
+      <todo-item v-for="(item, index) in 2" :key="index" />
+    </ul>
+
+  </div>
+</body>
+<script src="./lib/vue@next.js"></script>
+<script src="./lib/lodash.min.js"></script>
+<script>
+  const { ref, reactive, toRef } = Vue
+  const App = Vue.createApp({
+    setup(props) {
+      const originString = 'wang'
+      const newCount = ref(3)
+
+      const inputValue = ref(originString)
+
+      const newArr = ref([1, 2, 3])
+
+const originObj = {
+        count: 99
+      }
+      const state = reactive(originObj)
+
+      const handleClickNum = (item) => {
+        inputValue.value = item
+        // console.log()
+        console.log("originString, inputValue.value, ", originString, inputValue.value)
+      }
+
+      const inputRefHandle = () => {
+        // 不会改变原数据  originString 
+        console.log("originString, inputValue.value, ", originString, inputValue.value)
+      }
+
+      const inputReactiveHandle = () => {
+        // 会改变原数据  originObj 
+        console.log("originObj, state.count, ", originObj, state.count)
+      }
+
+
+      const handlePlus = () => {
+        newCount.value++
+      }
+
+      return {
+        newCount,
+        newArr,
+        inputValue,
+        handlePlus,
+        handleClickNum,
+        inputRefHandle,
+        inputReactiveHandle,
+        state
+      }
+    },
+    data() {
+      return {
+        count: 2
+      }
+    },
+    created() {
+      this.debouncedClick = _.debounce(this.minus, 500)
+    },
+    methods: {
+      add: _.debounce(function () {
+        this.count++
+      }, 500),
+      minus() {
+        this.count--
+        console.log("this.count", this.count)
+      }
+    },
+  })
+  App.component('todo-item', {
+    template: `<li>todo-item</li>`
+  })
+
+  App.component('save-button', {
+    created() {
+      // 用 Lodash 的防抖函数
+      this.debouncedClick = _.debounce(this.click, 500)
+    },
+    unmounted() {
+      // 移除组件时，取消定时器
+      this.debouncedClick.cancel()
+    },
+    methods: {
+      click() {
+        // ... 响应点击 ...
+        console.log("响应点击")
+      }
+    },
+    template: `
+    <button @click="debouncedClick">
+      Save
+    </button>
+  `
+  })
+
+  // App.directive('focus', FocusDirective)
+  App.mount("#app")
+
+</script>
+
+</html>

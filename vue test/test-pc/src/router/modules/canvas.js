@@ -20,7 +20,7 @@ const canvasRouter = {
     },
     {
       path: 'canvas-demo2',
-      component: () => import('@/views/canvas/demo1.vue'),
+      component: () => import('@/views/canvas/demo2.vue'),
       name: 'canvasDemo2',
       meta: { title: 'canvas-demo2' }
     }

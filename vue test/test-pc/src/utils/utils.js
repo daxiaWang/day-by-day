@@ -74,3 +74,29 @@ export function getBrowser() {
     return 'Unkown'
   }
 }
+
+export function throttle(fn, wait, options = {}) {
+  let timer
+  let previous = 0
+  const throttled = function() {
+    const now = +new Date()
+    // remaining 不触发下一次函数的剩余时间
+    if (!previous && options.leading === false) previous = now
+    const remaining = wait - (now - previous)
+    if (remaining < 0) {
+      if (timer) {
+        clearTimeout(timer)
+        timer = null
+      }
+      previous = now
+      fn.apply(this, arguments)
+    } else if (!timer && options.trailing !== false) {
+      timer = setTimeout(() => {
+        previous = options.leading === false ? 0 : new Date().getTime()
+        timer = null
+        fn.apply(this, arguments)
+      }, remaining)
+    }
+  }
+  return throttled
+}

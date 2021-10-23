@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    dot-a {
+    display: inline-block;
+    height: 1em; line-height: 1;
+    text-align: left;
+    vertical-align: -.25ex;
+    overflow: hidden;
+}
+dot-a::before {
+    display: block;
+    content: '...\A..\A.';
+    white-space: pre-wrap;
+    animation: dot1 3s infinite step-start both;
+}
+@keyframes dot1 {
+    33% { transform: translateY(-2em); }
+    66% { transform: translateY(-1em); }
+}
+
+  </style>
+</head>
+<body>
+  <div>正在載入中<dot-a>...</dot-a>
+  </div>
+</body>
+</html>

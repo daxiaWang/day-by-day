@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组合式API</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <div v-for="item in repositories" :key="item">
+        {{ item }}
+      </div>
+    </div>
+
+    <hr>
+
+    <div>
+      {{counter}} <br>
+      counter * 2 ---- {{twiceTheCounter}} <br>
+      <input type="text" v-model="counter"> <br>
+      <button @click="counter++">change</button>
+    </div>
+
+    <hr>
+    <input type="text" v-model="user" @input="inputUser">
+
+    {{user}}
+
+    <hr>
+
+    <div>
+      searchQuery --- {{searchQuery}} <br>
+
+      {{handleSearch}} <br>
+      <input type="text" v-model="searchQuery"> <br>
+
+    </div>
+
+
+  </div>
+</body>
+<script src="./lib/vue@next.js"></script>
+<script src="./lib/lodash.min.js"></script>
+<script>
+  const { ref, reactive, toRefs, onMounted, watch, computed } = Vue
+  const App = Vue.createApp({
+    props: {
+      user: {
+        type: String,
+        default: "wang"
+      },
+    },
+    setup(props) {
+
+      console.log("props", toRefs(props))
+
+      // const { user } = toRefs(props)
+
+      const user = ref("wangxj")
+
+
+      const inputUser = () => {
+        console.log('user------', user.value)
+      }
+
+      const repositories = ref([])
+
+      // const userNew = 
+
+      const getUserRepositories = () => {
+        repositories.value = ['12', '23', '34']
+      }
+
+      onMounted(getUserRepositories) // 在 `mounted` 时调用 `getUserRepositories`
+
+      const counter = ref(0)
+
+      /**
+       * watch 响应式更改
+       * 三个参数
+       * 一个想要侦听的响应式引用或 getter 函数
+       * 一个回调
+       * 可选的配置选项
+      */
+
+      watch(counter, (newVal, oldVal) => {
+        console.log('the new counter value is:' + counter.value)
+      })
+
+      const twiceTheCounter = computed(() => counter.value * 2)
+
+      counter.value++
+      console.log(counter.value)
+      console.log(twiceTheCounter.value)
+
+      const searchQuery = ref("")
+
+      console.log("searchQuery.value", searchQuery.value)
+      
+
+      const handleSearch = computed(() => {
+        return repositories.value.filter(
+          item => item.includes(searchQuery.value)
+        )
+      })
+
+      watch(searchQuery, handleSearch)
+      console.log("handleSearch", handleSearch)
+
+      return {
+        repositories,
+        getUserRepositories,
+        counter,
+        user,
+        inputUser,
+        twiceTheCounter,
+        searchQuery,
+        handleSearch
+      }
+
+    },
+  })
+
+  App.mount("#app")
+
+</script>
+
+</html>

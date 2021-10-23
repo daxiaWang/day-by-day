@@ -1,51 +1,6 @@
 <template>
   <div id="app">
-    <div
-      ref="navRef"
-      style="position: fixed; top: 0; z-index: 999; width: 100%"
-    >
-      <!-- <div style="width: 100%"> -->
-      <!-- {{isThemeColor ? '#3296FA' : bgColor ? bgColor : '#fff'}} -->
-      <van-nav-bar
-        v-if="isShow"
-        :style="{
-          backgroundColor: isThemeColor
-            ? '#3296FA'
-            : bgColor
-              ? bgColor
-              : '#fff',
-          color: isThemeColor ? '#fff !important' : '',
-        }"
-        @click-left="onClickLeft"
-      >
-        <template #left>
-          <van-icon
-            v-if="!hideReture"
-            name="arrow-left"
-            :color="isThemeColor ? '#fff' : ''"
-          />
-          <!-- <span v-if="!hideReture">返回</span> -->
-        </template>
-        <template #title>
-          <span :style="{ color: isThemeColor ? '#fff !important' : '' }">{{
-            title
-          }}</span>
-        </template>
-        <template #right>
-          <van-popover
-            v-model="showPopover"
-            placement="bottom-end"
-            trigger="click"
-            :actions="actions"
-            @select="onSelect"
-          >
-            <template #reference>
-              <van-icon v-if="$route.path === '/index'" size="22" name="apps-o" />
-            </template>
-          </van-popover>
-        </template>
-      </van-nav-bar>
-    </div>
+
     <!-- <div v-if="isShow" style="height: 44px"></div> -->
     <div class="router_box" :style="{ top: heightRef }">
       <!-- <keep-alive :include="catchList"> -->
@@ -59,11 +14,12 @@
 export default {
   name: 'App',
   data() {
+    // 通过 actions 属性来定义菜单选项
+    this.actions = [{ text: '审批', to: '/shenpi' }]
     return {
       heightRef: 0,
       catchList: this.$store.getters.catchList,
       showPopover: false,
-      // 通过 actions 属性来定义菜单选项
       actions: [{ text: '审批', to: '/shenpi' }]
     }
   },
@@ -98,15 +54,14 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.$refs.navRef.offsetHeight)
+    const that = this
     this.$nextTick(() => {
-      console.log(
-        'this.$refs.navRef.offsetHeight',
-        this.$refs.navRef.offsetHeight
-      )
-      this.$store.commit('user/navHeight', this.$refs.navRef.offsetHeight)
-      this.heightRef = `${this.$refs.navRef.offsetHeight}px`
+      window.addEventListener('resize', function(e) {
+        that.$store.commit('user/navHeight', that.$refs.navRef.offsetHeight)
+        that.heightRef = `${that.$refs.navRef.offsetHeight}px`
+      }, true)
     })
+    console.log('this.actions', this.actions)
   },
   methods: {
     onClickLeft() {

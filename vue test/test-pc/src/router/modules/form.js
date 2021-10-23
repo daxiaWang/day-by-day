@@ -20,7 +20,7 @@ const formRouter = {
     },
     {
       path: 'form-demo1',
-      component: () => import('@/views/form/demo.vue'),
+      component: () => import('@/views/form/demo1.vue'),
       name: 'FormDemo',
       meta: { title: 'form-demo1' }
     }

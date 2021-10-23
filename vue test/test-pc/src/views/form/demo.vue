@@ -8,6 +8,7 @@
 <script>
 import CustomInput from './component/CustomInput.vue'
 import CustomCheck from './component/CustomCheck'
+import apiObj from '@/fnJS/index'
 export default {
   components: {
     CustomInput,
@@ -18,6 +19,9 @@ export default {
       check: '',
       msg: ''
     }
+  },
+  mounted() {
+    console.log('apiObj ', apiObj.aa())
   },
   methods: {
     handleChange(value) {
