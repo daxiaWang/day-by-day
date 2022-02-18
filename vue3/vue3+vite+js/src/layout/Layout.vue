@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { Sidebar, Navbar, AppMain, TagsView } from './components'
 // import { reactive, toRefs } from "vue";
 
 // export default {

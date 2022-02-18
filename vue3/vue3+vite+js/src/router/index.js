@@ -35,13 +35,25 @@ export const routes = [
   {
     path: '/test',
     component: Layout,
-    redirect: '/test/demo1',
+    redirect: '/test/demo',
     children: [
+      {
+        path: 'demo',
+        name: 'Demo',
+        component: () => import('@/pages/test/index'),
+        meta: { title: 'demo', icon: 'test' }
+      },
       {
         path: 'demo1',
         name: 'Demo1',
-        component: () => import('@/pages/test/index'),
+        component: () => import('@/pages/test/demo1'),
         meta: { title: 'demo1', icon: 'test' }
+      },
+      {
+        path: 'demo2',
+        name: 'Demo2',
+        component: () => import('@/pages/test/demo2'),
+        meta: { title: 'demo2', icon: 'test' }
       }
     ]
   },

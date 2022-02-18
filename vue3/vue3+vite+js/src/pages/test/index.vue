@@ -7,46 +7,42 @@ state -- {{count}}
 </template>
 
 <script>
+import useUserRepositories from './component/useUserRepositories'
+import useRepositoryNameSearch from './component/useRepositoryNameSearch'
+import useRepositoryFilters from './component/useRepositoryFilters'
 import { reactive, toRefs } from 'vue'
 export default {
-  components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
+  // components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
     user: { 
       type: String,
       required: true
     }
   },
-  data () {
-    return {
-      repositories: [], // 1
-      filters: {  }, // 3
-      searchQuery: '' // 2
-    }
-  },
-  computed: {
-    filteredRepositories () {  }, // 3
-    repositoriesMatchingSearchQuery () {  }, // 2
-  },
-  watch: {
-    user: 'getUserRepositories' // 1
-  },
-  methods: {
-    getUserRepositories () {
-      // 使用 `this.user` 获取用户仓库
-    }, // 1
-    updateFilters () {  }, // 3
-  },
-  mounted () {
-    this.getUserRepositories() // 1
-  },
+  setup(props) {
+    const { user } = toRefs(props)
 
-  setup () {
-    const state = reactive({
-      count: 0,
-    })
-  
+    const { repositories, getUserRepositories } = useUserRepositories(user)
+
+    const {
+      searchQuery,
+      repositoriesMatchingSearchQuery
+    } = useRepositoryNameSearch(repositories)
+
+    const {
+      filters,
+      updateFilters,
+      filteredRepositories
+    } = useRepositoryFilters(repositoriesMatchingSearchQuery)
+
     return {
-      ...toRefs(state),
+      // 因为我们并不关心未经过滤的仓库
+      // 我们可以在 `repositories` 名称下暴露过滤后的结果
+      repositories: filteredRepositories,
+      getUserRepositories,
+      searchQuery,
+      filters,
+      updateFilters
     }
   }
 }
