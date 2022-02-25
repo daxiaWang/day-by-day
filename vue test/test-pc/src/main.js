@@ -49,6 +49,13 @@ echarts.registerMap('china', china)
 //   mockXHR()
 // }
 
+import Directives from '@/directive'
+Vue.use(Directives)
+
+import VirSelector from '@/views/list/com/index'
+
+Vue.use(VirSelector)
+
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium', // set element-ui default size
   locale: zhLocale // 如果使用中文，无需设置，请删除

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  const now = new Date()
+  const year = now.getFullYear()
+  // 月份和日期 如果是一位前面给它填充一个0
+  const month = (now.getMonth() + 1).toString().padStart(2, '0')
+  const day = (now.getDate()).toString().padStart(2, '0')
+  console.log(year, month, day)
+  console.log(`${year}-${month}-${day}`) //输入今天的日期 2021-12-31
+</script>
+<script>
+  export const getDateSolt = (startDay, endDay, format = "", isStart = true, isEnd = false) => {
+    var getDate = function (str) {
+      var tempDate = new Date();
+      var list = str.split("/");
+      tempDate.setFullYear(list[0]);
+      tempDate.setMonth(list[1] - 1);
+      tempDate.setDate(list[2]);
+      return tempDate;
+    };
+    var date1 = getDate(startDay);
+    var date2 = getDate(endDay);
+    if (date1 > date2) {
+      var tempDate = date1;
+      date1 = date2;
+      date2 = tempDate;
+    }
+    if (!isStart) {
+      date1.setDate(date1.getDate() + 1);
+    }
+    if (isEnd) {
+      date2.setDate(date2.getDate() + 1);
+    }
+    var dateArr = [];
+    var i = 0;
+    while (
+      !(
+        date1.getFullYear() == date2.getFullYear() &&
+        date1.getMonth() == date2.getMonth() &&
+        date1.getDate() == date2.getDate()
+      )
+    ) {
+      var dayStr = date1.getDate().toString();
+      var dayStr0 = dayStr;
+      if (dayStr.length == 1) {
+        dayStr0 = "0" + dayStr;
+      }
+      var monthStr = date1.getMonth() + 1;
+      var monthStr0 = monthStr;
+      if (monthStr < 10) {
+        monthStr0 = "0" + monthStr;
+      }
+      var dateItem = {
+        name: `${date1.getFullYear()}${format}${monthStr0}${format}${dayStr0}`,
+        value: `${date1.getFullYear()}${monthStr0}${dayStr0}`,
+        index: i,
+        year: date1.getFullYear(),
+        month: date1.getMonth() + 1,
+        date: dayStr,
+        date0: dayStr0,
+        day: date1.getDay(),
+      };
+      // dateArr[i] = date1.getFullYear() + "-" + (date1.getMonth() + 1) + "-" + dayStr;
+      dateArr[i] = dateItem;
+      i++;
+      date1.setDate(date1.getDate() + 1);
+    }
+    // console.log("dateArr", dateArr)
+    return dateArr;
+  }
+</script>
+
+</html>

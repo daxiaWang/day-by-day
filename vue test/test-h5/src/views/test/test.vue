@@ -16,12 +16,17 @@
       <div class="center"></div>
       <div class="right"></div>
     </div>
+    <PromiseAll />
   </div>
 </template>
 <script>
 import testMixis from './testMixis'
+import PromiseAll from './Promiseall.vue'
 export default {
   name: 'Test',
+  components: {
+    PromiseAll
+  },
   mixins: [testMixis],
   data() {
     return {

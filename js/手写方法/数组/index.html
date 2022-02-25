@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // forEach
+  let nameList = [
+    { name: 'wang', id: 1 },
+    { name: 'zhang', id: 2 },
+    { name: "li", id: 3 }
+  ]
+  Array.prototype.w_forEach = function (callback) {
+    for (let index = 0; index < this.length; index++) {
+      // const element = array[index];
+      callback(this[index], index, this)
+    }
+  }
+  nameList.w_forEach((item, index, arr) => {
+    console.log('w_forEach', item, index, arr)
+  })
+
+  /**
+   * map
+   * item：遍历项
+     index：遍历项的索引
+     arr：数组本身
+   */
+  Array.prototype.w_map = function (callback) {
+    let res = []
+    for (let index = 0; index < this.length; index++) {
+      const element = this[index];
+      res.push(callback(this[index], index, this))
+    }
+    return res
+  }
+
+  let new_w_map = nameList.w_map((item, index, arr) => `${item.name}-${item.id}-${index}`)
+  console.log("new_w_map", new_w_map)
+
+  /**
+   * filter
+   * item：遍历项
+     index：遍历项的索引
+     arr：数组本身
+   */
+
+  console.log('filter', nameList.filter(item => item.id === 1))
+
+  Array.prototype.w_filter = function (callback) {
+    let res = []
+    for (let i = 0; i < this.length; i++) {
+      const element = this[i];
+      callback(this[i], i, this) && res.push(this[i])
+    }
+    return res
+  }
+
+  console.log('w_filter', nameList.w_filter(item => item.id > 1))
+
+  /**
+  * every
+  * item：遍历项
+    index：遍历项的索引
+    arr：数组本身
+  */
+
+  console.log("every", nameList.every(item => item.id))
+
+  Array.prototype.w_every = function (callback) {
+    let flag = true
+    for (let i = 0; i < this.length; i++) {
+      flag = callback(this[i], i, this)
+      if (!flag) break
+
+    }
+    return flag
+  }
+  console.log("w_every", nameList.w_every(item => item.id > 1))
+
+  /**
+   *  some
+   *  item
+   *  index
+   *  arr
+   */
+  console.log("some", nameList.some(item => item.id > 2))
+
+  Array.prototype.w_some = function (callback) {
+    let flag = false
+    for (let i = 0; i < this.length; i++) {
+      // const element = array[i];
+      flag = callback(this[i], i, this)
+      if (flag) break
+    }
+    return flag
+  }
+  console.log("w_some", nameList.w_some(item => item.id > 2))
+
+  /**
+   *  reduce
+   *
+  */
+  let aaarr = [{ id: 0 }, { id: 2 }, { id: 4 }, { id: 6 }]
+  let reduceArr = aaarr.reduce((pre, next, index, arr) => {
+    // console.log("pre, next", pre, next, index, arr)
+    return pre + next.id
+  }, 0)
+  console.log("reduceArr", reduceArr)
+
+  Array.prototype.w_reduce = function (callback, ...args) {
+    let start = 0, pre
+    // console.log("args", args)
+    if (args.length) {
+      pre = args[0]
+    } else {
+      pre = this[0]
+      start = 1
+    }
+    for (let i = start; i < this.length; i++) {
+      pre = callback(pre, this[i], i, this)
+    }
+    return pre
+  }
+
+  // 计算所有num相加
+  const sum = aaarr.w_reduce((pre, next) => {
+    return pre + next.id
+  }, 0)
+  console.log('w_reduce', sum) // 85
+
+  /**
+   * findIndex
+   * item   index    arr
+    */
+  console.log('findIndex', aaarr.findIndex(item => item.id === 5))
+
+  Array.prototype.w_findIndex = function (callback) {
+    for (let i = 0; i < this.length; i++) {
+      if (callback(this[i], i, this)) {
+        return i
+      }
+    }
+    return -1
+  }
+
+  console.log("w_findIndex", aaarr.w_findIndex(item => item.id === 4))
+  console.log("w_findIndex", aaarr.w_findIndex(item => item.id === 5))
+
+  /**
+   * find
+   * item    index     arr
+  */
+  console.log("find", aaarr.find(item => item.id === 2))
+  
+  Array.prototype.w_find = function(callback) {
+    for (let index = 0; index < this.length; index++) {
+      if (callback(this[index], index, this)) {
+        return this[index]
+      }
+    }
+  }
+  
+  console.log("w_find", aaarr.w_find(item => item.id === 2))
+
+  /**
+   * fill
+  */
+  console.log('fill', [{ name: '科比', num: 24 }].fill('33', 1, 4))
+  
+  Array.prototype.w_fill = function(value, start = 0, end) {
+    end = end || this.length
+    for (let i = start; i < end; i++) {
+      this[i] = value
+    }
+    return this
+  }
+  console.log('w_fill', [{ name: '科比', num: 24 }].w_fill('33', 1, 4))
+  
+
+
+
+
+
+
+</script>
+
+</html>

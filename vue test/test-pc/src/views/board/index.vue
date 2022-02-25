@@ -19,8 +19,8 @@
 <script>
 // import show from './views/show'
 import zhengqi from './show'
-import yanfa from './yanfa/index.vue'
-import jiaofu from './jiaofu/index.vue'
+import yanfa from './yanfa/index'
+import jiaofu from './jiaofu/index'
 import shichang from './shichang'
 export default {
   name: 'App',

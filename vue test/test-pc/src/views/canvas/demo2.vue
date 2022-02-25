@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas id="canvas" width="1000" height="1000" style="background: #000;" />
+    <canvas id="canvas" width="1000" height="500" style="background: #000;" />
     <button id="btn">开始排序</button>
   </div>
 </template>

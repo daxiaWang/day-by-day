@@ -33,6 +33,7 @@ export default {
     ]),
     routes() {
       const route = this.$router
+      // console.log('route', route)
       return route.options.routes
     },
     activeMenu() {
@@ -55,6 +56,7 @@ export default {
     }
   },
   mounted() {
+    // console.log('this.$router', this.$router)
   }
 }
 </script>

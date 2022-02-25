@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .header {
+      width: 100%;
+      height: 80px;
+      min-width: 1200px;
+      background-color: #FFF;
+      font-size: 30px;
+      color: #555;
+      font-weight: bold;
+    }
+    .header-wrap {
+    width: 1200px;
+    margin: 0 auto;
+    height: 60px;
+    }
+
+    .main {
+      border: 1px solid;
+      width: 100%;
+      min-width: 1200px;
+      height: 480px;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      background: url(img/banner2.png) center top no-repeat;
+      background-size: 100% 480px;
+    }
+
+    .login {
+      width: 310px;
+      height: 400px;
+      padding: 25px 30px 0;
+      margin-left: 130px;
+      top: 30px;
+      background-color: #FFF;
+      left: 50%;
+      position: absolute;
+      z-index: 2;
+    }
+    .btn{
+      box-sizing: border-box;
+      width: 100%;
+      height: 170px;
+      /* background: rgba(9, 119, 245, 0.3); */
+      /* padding: 10px; */
+      margin-bottom: 20px;
+      /* padding-top: 40px; */
+    }
+    .btn a {
+      width: 100%;
+      height: 100%;
+      color: #333;
+      font-size: 24px;
+      color: #173ae2;
+    }
+    .btn a:hover {
+      color: #173ae2;
+    }
+    p{
+      font-size: 18px;
+    }
+    .box1{
+    }
+    .box1 a{
+      display: inline-block;
+      width: 100%;
+      height: 170px;
+      background: url(img/2.png) center top no-repeat;
+      background-size: 310px 170px;
+    }
+    .box2 a{
+      display: inline-block;
+      width: 100%;
+      height: 170px;
+      background: url(img/1.png) center top no-repeat;
+      background-size: 310px 170px;
+    }
+  </style>
+</head>
+<!-- https://blog.csdn.net/u014100552/article/details/102892674   js调用本地应用程序 -->
+
+<body>
+  <div class="header">
+    <div class="header-wrap">
+      长安汽车系统集成演示
+    </div>
+  </div>
+  <div class="main">
+    <div class="login">
+      <div class="btn box1">
+        <a target="_blank" href="http://baidu.com"></a>
+        <!-- <p>
+          补助发放、消费管理
+        </p> -->
+      </div>
+      <div class="btn box2">
+        <a href="wxjtest://"></a>
+        <!-- <p>
+          员工卡管理、门禁系统、考勤系统
+        </p> -->
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

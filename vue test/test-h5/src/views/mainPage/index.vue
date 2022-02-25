@@ -1,6 +1,6 @@
 <template>
   <div class="main_page">
-    <vuePhoto></vuePhoto>
+    <!-- <vuePhoto></vuePhoto> -->
   </div>
 </template>
 

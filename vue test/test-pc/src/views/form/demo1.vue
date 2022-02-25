@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import { BaseGroup, RuzhiGroup } from './data'
+// import { BaseGroup, RuzhiGroup } from './data'
+import { BaseGroup } from './data'
 import { throttle } from '@/utils/utils'
 export default {
   components: {

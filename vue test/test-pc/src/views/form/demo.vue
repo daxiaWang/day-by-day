@@ -1,7 +1,9 @@
 <template>
   <div>
     <CustomInput v-model="msg" />
-    <CustomCheck v-model="check" @change="handleChange" />
+    <CustomCheck v-model="check" @change="handleChange">
+      <i slot="custom-icon" class="el-icon-share" />
+    </CustomCheck>
   </div>
 </template>
 

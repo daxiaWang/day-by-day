@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="time"></div>
+</body>
+<script>
+  var time = new Date('2020-11-1'.replace(/\-/g, '/'))
+  var nowDate = new Date('2020-11-1'.replace(/\-/g, '/'));
+  console.log('time', time)
+      var nowYear = nowDate.getFullYear()
+      var nowMonth = nowDate.getMonth() + 1;
+      var month = nowMonth > 9 ? nowMonth : "0" + nowMonth; // getMonth 方法返回 0-11，代表1-12月
+
+      var strDate = nowDate.getDate() > 9 ? nowDate.getDate() : "0" + nowDate.getDate();
+  console.log(document.getElementById('time'))
+  document.getElementById('time').innerText = nowYear + '{'+month + "}" + '【'+strDate + "】"
+  var arr  = [1, 2, 1],
+    i = 0,
+    length = arr.length;
+
+    for (;  i< length ; i++) {
+      const element = arr[i];
+      if (element === 1) {
+        arr.splice(i, 1);
+        i--;
+      }
+    }
+    console.log("arr", arr)
+
+
+    console.log("-------------")
+    var arr2  = [1, 2, 1]
+    var arr1 = arr2.filter(index => index !== 1)
+    console.log("arr1", arr1)
+    console.log('----------------------------')
+    let num = [1, 2, 3, 4];
+    let person = {
+        name: 'lihua'
+    };
+    num.forEach(function (self, index, arr) {
+        console.log(`当前元素为${self}索引为${index},属于数组${arr}`);
+        console.log(this.name+='真帅');
+    }, person)
+</script>
+</html>

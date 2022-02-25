@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script type="text/javascript" src="script/moment.min.js"></script>
+<script>
+  var start = '10:30:00', end = '13:30:00'
+  var startArr = start.split(":"), endArr = end.split(":")
+  var s0 = startArr[0], s1 = startArr[1], num = e0 = endArr[0], e1 = endArr[1]
+  console.log("s0", start, end, s0, e0 - s0)
+  var parentObj = {}
+  // var num = e0
+  if (e1 === '30') {
+    num = parseInt(e0)+1
+  }
+  for (var index = s0; index < num; index++) {
+    // console.log("index", index)
+    var childObj = {}
+    
+      for (var j = 0; j < 2; j++) {   //判断
+          childObj[j] = {
+            id: index + '' + j,
+            time: index,
+            show: true,
+          }
+      }
+      parentObj[index] = childObj
+      
+    }
+    if (s1 === '30') {
+      parentObj[s0][0].show = false
+    }
+    
+    if (e1 === '30') {
+      parentObj[e0][1].show = false
+    }
+    console.log("parentObj", parentObj) 
+
+//   {
+//   10: {
+//     00-30: {},
+//     30-00: {},
+//   },
+//   11: {
+//     00-30: {},
+//     30-00: {},
+//   },
+//  12: {
+//     00-30: {},
+//     30-00: {},
+//   },
+//   13: {
+//     00-30: {},
+//   }
+// }
+</script>
+</html>

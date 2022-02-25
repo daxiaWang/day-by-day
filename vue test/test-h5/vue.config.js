@@ -11,12 +11,12 @@ const port = process.env.port || process.env.npm_config_port || 3000
 
 module.exports = {
   publicPath: './',
-  outputDir: 'video_test',
+  outputDir: 'test_h5',
   runtimeCompiler: true,
   lintOnSave: false,
   devServer: {
-    https: true,
-    port: '448', // 443  https默认端口号
+    // https: true,
+    // port: '448', // 443  https默认端口号
     // port: '443', // 443  https默认端口号
     // host: 'test.wanmeiqiye.com',
     host: '127.0.0.1',

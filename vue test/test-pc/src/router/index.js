@@ -14,8 +14,10 @@ import Layout from '@/layout'
 import formRouter from './modules/form'
 import canvasRouter from './modules/canvas'
 import asyncLoginRouter from './modules/async'
+import listDemoRouter from './modules/list'
+import otherRouter from './modules/other'
 // canvasRouter
-
+console.log('otherRouter', otherRouter)
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -68,32 +70,34 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/vueuse',
+    path: '/es6',
     component: Layout,
-    redirect: '/vueuse/vueuse-index',
-    name: 'vueuse-index',
+    redirect: '/es6/es6-index',
+    name: 'es6-index',
     meta: {
-      title: 'vueuse',
+      title: 'es6',
       icon: 'el-icon-c-scale-to-original'
     },
     children: [
       {
-        path: 'vueuse-index',
-        component: () => import('@/views/vueuse/index.vue'),
-        name: 'vueuse-index',
-        meta: { title: 'vueuse-index' }
+        path: 'es6-index',
+        component: () => import('@/views/es6/index.vue'),
+        name: 'es6-index',
+        meta: { title: 'es6-index' }
       },
       {
-        path: 'vueuse-demo',
-        component: () => import('@/views/vueuse/demo.vue'),
-        name: 'vueuse-demo',
-        meta: { title: 'vueuse-demo' }
+        path: 'es6-demo',
+        component: () => import('@/views/es6/demo.vue'),
+        name: 'es6-demo',
+        meta: { title: 'es6-demo' }
       }
     ]
   },
   formRouter,
   canvasRouter,
-  asyncLoginRouter
+  asyncLoginRouter,
+  listDemoRouter,
+  otherRouter
 
 ]
 // console.log('constantRoutes', constantRoutes)

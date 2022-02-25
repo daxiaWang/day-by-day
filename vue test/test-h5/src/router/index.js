@@ -93,6 +93,24 @@ export const constantRoutes = [
       title: 'test1',
       keepAlive: false
     }
+  },
+  {
+    path: '/list',
+    name: 'list',
+    component: () => import('@/views/list/index'),
+    meta: {
+      title: 'list',
+      keepAlive: false
+    }
+  },
+  {
+    path: '/throttle',
+    name: 'throttle',
+    component: () => import('@/views/form/throttle'),
+    meta: {
+      title: 'throttle',
+      keepAlive: false
+    }
   }
 ]
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  const tel = '18781268679'
+  const newTel = tel.slice(-4).padStart(tel.length, '*')
+  console.log(newTel) // *******5678
+</script>
+<script>
+  const now = new Date()
+  const year = now.getFullYear()
+  // 月份和日期 如果是一位前面给它填充一个0
+  const month = (now.getMonth() + 1).toString().padStart(2, '0')
+  const day = (now.getDate()).toString().padStart(2, '0')
+  console.log(year, month, day)
+  console.log(`${year}-${month}-${day}`) //输入今天的日期 2021-12-31
+</script>
+<script>
+  // 伪代码
+console.log(new Date().getTime()) // 时间戳 13位的
+timestamp = +String(timestamp).padEnd(13, '0')
+</script>
+</html>
