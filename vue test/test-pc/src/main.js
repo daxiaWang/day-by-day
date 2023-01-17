@@ -33,6 +33,8 @@ Vue.prototype.$echarts = echarts
 import china from '@/views/board/show/china.json'
 echarts.registerMap('china', china)
 
+import 'fengmap/build/toolBarStyle.css'
+
 // console.log('echarts', echarts)
 // Vue.prototype.$axios = axios
 

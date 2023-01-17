@@ -13,8 +13,8 @@
 
   </div>
 
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="./js/vue.js"></script>
+  <script src="./js/vue-router@2.0.0.js"></script>
   <script>
 
     Vue.use(VueRouter);
@@ -28,9 +28,7 @@
             <router-link :to="{name:'category', params:{category:'recommened'}}">推荐</router-link>
             <router-link :to="{name:'category', params:{category:'backend'}}">后端</router-link>
             <router-link :to="{name:'category', params:{category:'fronted'}}">前端</router-link>
-
             <router-view></router-view>
-
             </div>
         `
     };

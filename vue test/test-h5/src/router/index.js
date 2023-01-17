@@ -111,6 +111,26 @@ export const constantRoutes = [
       title: 'throttle',
       keepAlive: false
     }
+  },
+  // Calenda
+  {
+    path: '/Calenda',
+    name: 'Calenda',
+    component: () => import('@/views/Calenda/index'),
+    meta: {
+      title: 'Calenda',
+      keepAlive: false
+    }
+  },
+  // Counter
+  {
+    path: '/Counter',
+    name: 'Counter',
+    component: () => import('@/views/counter/index'),
+    meta: {
+      title: 'Counter',
+      keepAlive: false
+    }
   }
 ]
 

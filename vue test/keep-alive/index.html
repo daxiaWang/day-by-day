@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/vant/2.12.25/index.min.css">
+  <style>
+     .my-page {
+      height: 100vh;
+      display: flex;
+      padding: 0 20px;
+      align-items: center;
+    }
+
+    .my-page .van-button {
+      margin-bottom: 50px;
+    }
+
+    /* 固定文章列表的高度,让滚动条出现在.article-list元素上 */
+    .article-list {
+      height: 85vh;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+    <div id="app">
+    <app></app>
+  </div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.5.2/vue-router.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vant/2.12.25/vant.min.js"></script>
+<script>
+    // 最外边组件,根组件
+  const App = {
+    name: 'App',
+    template: `<div>
+            <!-- 使用keep-alive缓存页面,通过include缓存部分页面 -->
+            <keep-alive :include="cachedViews">
+              <router-view></router-view>
+            </keep-alive>
+        </div>`,
+    data() {
+      return {
+        // 指定要缓存的组件name数组
+        cachedViews: ['Layout']
+      }
+    }
+  }
+  // Layout页面,有tabbar,显示嵌套路由
+  const Layout = {
+    name: 'Layout',
+    template: `<div>
+            <!-- 使用keep-alive缓存页面,通过include缓存部分页面 -->
+            <keep-alive :include="cachedViews">
+              <router-view></router-view>
+            </keep-alive>
+            <van-tabbar route>
+                <van-tabbar-item icon="home-o" to="/">主页</van-tabbar-item>
+                <van-tabbar-item icon="contact" to="/my">我的</van-tabbar-item>
+            </van-tabbar>
+        </div>`,
+    data() {
+      return {
+        // 指定要缓存的组件name数组
+        cachedViews: ['Home']
+      }
+    }
+  }
+  // 登录页面
+  const Login = {
+    name: 'Login',
+    template: `<div>
+            <van-nav-bar title="登录" />
+            <van-form>
+                <van-field label="用户名" />
+                <van-field type="password" label="密码"/>
+                <div style="margin: 16px;">
+                    <van-button round block type="info" to="/">提交</van-button>
+                </div>
+            </van-form> 
+        </div>`
+  }
+  // 文章列表页面
+  const ArticleList = {
+    name: 'ArticleList',
+    props: {
+      // 接受当前频道的信息
+      channel: { type: Object, required: true }
+    },
+    template: `
+      <div class="article-list" ref="listRef">
+        <van-cell v-for="(item, index) in list" :key="index">
+          <template #title>
+            <span>{{item.title}}</span>
+          </template>
+          <template #label>
+            <span>{{item.aut_name}}</span>
+            <span>{{item.comm_count}}评论</span>
+            <span>刚刚</span>
+          </template>
+        </van-cell>
+      </div>
+    `,
+    // 变为激活状态
+    activated() {
+      // 给.article-list元素赋值滚动条的位置数据
+      this.$refs.listRef.scrollTop = localStorage.getItem('scrollTop')
+    },
+    // 变为未激活状态
+    deactivated() {
+    },
+    mounted() {
+      //监听滚动条的滚动,保存滚动条的位置
+      this.$refs.listRef.onscroll = function (e) {
+        localStorage.setItem('scrollTop', e.target.scrollTop)
+      }
+    },
+    data() {
+      let list = []
+      for (var i = 0; i < 100; i++) {
+        list.push({ aut_name: "张三", title: this.channel.name + "-文章标题-" + (i + 1), comm_count: 0 })
+      }
+      return {
+        list
+      }
+    }
+  }
+  const Home = {
+    name: 'Home',
+    template: `<div>
+          <van-tabs color="#1989fa" sticky>
+            <van-tab :title="item.name"
+              v-for="(item, index) in channels"
+              :key="index">
+              <article-list :channel="item"></article-list>
+            </van-tab>
+          </van-tabs> 
+        </div>`,
+    components: {
+      ArticleList
+    },
+    data() {
+      return {
+        channels: [
+          { id: 0, name: "推荐" },
+          { id: 7, name: "数据库" },
+          { id: 11, name: "后端" },
+          { id: 12, name: "linux" },
+          { id: 13, name: "人工智能" },
+          { id: 17, name: "前端" },
+          { id: 18, name: "python" }
+        ]
+      }
+    }
+  }
+  const My = {
+    name: 'My',
+    template: `<div class="my-page">
+            <van-button type="info" size="large" round to="/login">登录</van-button>
+        </div>`,
+  }
+  // 路由配置
+  const router = new VueRouter({
+    routes: [
+      {
+        path: '/', component: Layout, children: [
+          // 需要缓存的路由,添加原信息,keepAlive为true
+          { path: '', component: Home },
+          { path: '/my', component: My }
+        ]
+      },
+      {
+        path: '/login', component: Login
+      }
+    ]
+  })
+  Vue.use(VueRouter)
+  new Vue({
+    el: '#app',
+    router,
+    components: {
+      App
+    }
+  })
+</script>
+</html>

@@ -21,6 +21,9 @@
                     <div class="button" @click="getCode">发送验证码</div>
                 </template>
             </van-field>
+            <div>
+                newmobile -- {{newmobile}}
+            </div>
             <van-button type="primary" block @click="submit">提交</van-button>
         </van-form>
     </div>
@@ -34,8 +37,37 @@
         // 在 #app 标签下渲染一个按钮组件
         new Vue({
             el: '#app',
+            computed: {
+                newmobile(){
+                console.log(this)
+                return this.mobile.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2")
+                }
+            },
+            // computed: {
+            //      //get的作用？当读取fullName时，get就会被调用，且返回值就是fullName的值
+            // //get什么时候被调用？1.当第一次读取fullName时。2.当所依赖的data数据发生变化时
+            //     newmobile: {
+            //         get() {
+            //             console.log(this)
+            //             return this.mobile
+            //         },
+            //         set(value) {
+            //             console.log("value", value)
+            //             //     this.mobile = newValue.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2")
+            //             // console.log("this.mobile", this.mobile)
+            //         }
+            //     }
+            // },
+            watch: {
+                mobile(newValue) {
+                    console.log("newValue", newValue)
+                    // console.log("newValue", newValue.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2"))
+                    // return newValue.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2")
+                }
+            },
             data: {
                 mobile: '', // 手机号码
+                // newmobile: '1', // 手机号码
                 code: '', // 验证码
                 // 校验手机号码
                 telRules: [{
@@ -43,7 +75,7 @@
                     message: '手机号码不能为空',
                     trigger: 'onBlur'
                 }, {
-                	// 自定义校验规则
+                    // 自定义校验规则
                     validator: value => {
                         return /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/
                             .test(value)
@@ -78,4 +110,5 @@
         });
     </script>
 </body>
+
 </html>

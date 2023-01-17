@@ -14,6 +14,7 @@
 export default {
   name: 'App',
   data() {
+    console.log('data this', this)
     // 通过 actions 属性来定义菜单选项
     this.actions = [{ text: '审批', to: '/shenpi' }]
     return {
@@ -56,12 +57,20 @@ export default {
   mounted() {
     const that = this
     this.$nextTick(() => {
-      window.addEventListener('resize', function(e) {
-        that.$store.commit('user/navHeight', that.$refs.navRef.offsetHeight)
-        that.heightRef = `${that.$refs.navRef.offsetHeight}px`
-      }, true)
+      // window.addEventListener('resize', function(e) {
+      //   that.$store.commit('user/navHeight', that.$refs.navRef.offsetHeight)
+      //   that.heightRef = `${that.$refs.navRef.offsetHeight}px`
+      // }, true)
     })
     console.log('this.actions', this.actions)
+    // 事件订阅
+    this.$bus.on('addProduct', res => {
+      this.product = res
+    })
+  },
+  beforeDestroy() {
+  // 销毁监听事件
+    this.$bus.off('addProduct')
   },
   methods: {
     onClickLeft() {

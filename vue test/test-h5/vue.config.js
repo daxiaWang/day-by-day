@@ -16,7 +16,7 @@ module.exports = {
   lintOnSave: false,
   devServer: {
     // https: true,
-    // port: '448', // 443  https默认端口号
+    port: '9988', // 443  https默认端口号
     // port: '443', // 443  https默认端口号
     // host: 'test.wanmeiqiye.com',
     host: '127.0.0.1',

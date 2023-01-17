@@ -23,6 +23,12 @@ const canvasRouter = {
       component: () => import('@/views/canvas/demo2.vue'),
       name: 'canvasDemo2',
       meta: { title: 'canvas-demo2' }
+    },
+    {
+      path: 'canvas-fengmap',
+      component: () => import('@/views/canvas/fengmap.vue'),
+      name: 'canvasFengmap',
+      meta: { title: 'canvas-fengmap' }
     }
   ]
 }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    {{msg}}
+    firstName: <input type="text" v-model="firstName"> </br>
+    </br>
+    lastName: <input type="text" v-model=lastName></br>
+    </br>
+    fullName： <input type="text" v-model=fullName></br>
+    </br>
+
+    <div>
+      手机号码：<input type="text" v-model="mobile">
+    </div>
+
+    <div>
+      newmobile <input type="text" v-model=newmobile></br>
+      newmobile ===== {{newmobile}}
+    </div>
+  </div>
+</body>
+<!-- 引入样式文件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css" />
+<!-- 引入 Vue 和 Vant 的 JS 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+<script>
+  var str = ''
+  new Vue({
+    el: "#app",
+    data() {
+      return {
+        msg: "ceshi",
+        firstName: 'joe',
+        lastName: 'lili',
+        mobile: "1",
+        // newmobile: ""
+      }
+    },
+    computed: {
+      //get的作用？当读取fullName时，get就会被调用，且返回值就是fullName的值
+      //get什么时候被调用？1.当第一次读取fullName时。2.当所依赖的data数据发生变化时
+      fullName: {
+        get() {
+          console.log(this)
+          return this.firstName + " " + this.lastName
+        },
+        set(val) {
+          val = val.split(" ")
+          this.firstName = val[0]
+          this.lastName = val[1]
+        }
+      },
+      // fullName() {
+      //   console.log(1)
+      //   return this.firstName + this.lastName
+      // },
+      newmobile() {
+        console.log(2)
+        return this.mobile.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2")
+      }
+    }
+  })
+</script>
+
+</html>

@@ -113,6 +113,10 @@ export default {
     onFinish({ selectedOptions }) {
       this.show = false
       this.fieldValue = selectedOptions.map((option) => option.text).join('/')
+    },
+    addProduct(row) {
+      // 事件发布
+      this.$bus.emit('addProduct', row)
     }
   }
 }
