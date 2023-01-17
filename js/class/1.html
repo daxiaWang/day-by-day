@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    canvas {
+      box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+ 
+<body>
+  <!-- canvas 画布 -->
+  <canvas id="canvas"></canvas>
+ 
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width = 600;
+    const h = canvas.height = 400;
+ 
+    class Ball { // 申明 Ball类
+      constructor(x, y, r) { // 构造器 this指向 Ball类的实例对象
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.color = `rgb(${Ball.rpFn([55, 255])},${Ball.rpFn([55, 255])},${Ball.rpFn([55, 255])})`;
+        return this;
+ 
+      }
+      render(ctx) { // Ball类原型撒上的方法，实例对象能继承 
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(0, 0, this.r, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.restore();
+        return this;
+      }
+ 
+      static rpFn(arr) { // Ball类的静态方法，实例对象不能继承 
+        let max = Math.max(...arr);
+        let min = Math.min(...arr);
+        return Math.random() * (max - min) + min;
+ 
+      }
+    }
+ 
+    // const ball1 = new Ball(100, 100, 30).render(ctx); // Ball的实例化对象继承render()来绘制小球 
+ 
+    class ChildBall extends Ball { // 申明一个子类ChildBall 继承 父类Ball  
+      constructor(x, y, r) {
+        super(x, y, r); // 必须调用 super()，this指向ChildBall类的实例对象
+        this.vy = ChildBall.rpFn([2, 4]);
+        this.g = ChildBall.rpFn([0.2, 0.4]); // 子类ChildBall 继承 父类Ball的静态方法
+        this.a = 0;
+        return this;
+ 
+      }
+      move(ctx) { // ChildBall类原型上的方法，实例对象能继承
+        this.y += this.vy;
+        this.vy += this.g;
+        let current = this.vy * -0.75;
+ 
+        if (this.y + this.r >= ctx.canvas.height) {
+          this.y = ctx.canvas.height - this.r;
+ 
+          if (Math.abs(current - this.a) < 0.01) return false;
+ 
+          this.a = this.vy *= -0.75;
+        }
+ 
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        super.render(ctx);  // 子类ChildBall 调用父类Ball原型上的方法
+ 
+        return true;
+ 
+      }
+ 
+    }
+    // const ball1 = new ChildBall(100, 100, 30).render(ctx);  // ChildBall的实例化对象继承render()来绘制小球 
+ 
+    let ball, timer;
+ 
+    canvas.onclick = function (e) { // 鼠标点击 画布 绘制小球
+      let x = e.offsetX, y = e.offsetY;
+      let r = Ball.rpFn([24, 55]);
+      console.log("r", r)
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      ball = new ChildBall(x, y, r).render(ctx);
+      // ballMove(); // 小球 自由落体运动
+    }
+ 
+    function ballMove() {
+      timer = window.requestAnimationFrame(ballMove);
+      if (!ball.move(ctx)) {
+        window.cancelAnimationFrame(timer);
+      }
+    }
+ 
+  </script>
+ 
+</body>
+ 
+</html>
