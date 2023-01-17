@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      background: #000;
+    }
+    .div{
+      width: 1204px;
+      height: 200px;
+      margin: 30px auto;
+      /* border: 1px solid #fff; */
+    }
+    .div1{
+      /* 
+        background=
+        background-color 
+        background-image
+        background-repeat 
+        background-attachment  规定背景图像是否固定或者随着页面的其余部分滚动。
+        background-position
+      */
+      /*  center top/1204px */
+      background: url(./img/right2.png) no-repeat;
+      background-position-x: center;
+      background-position-y: 0%;
+      background-size: 100% auto;
+    }
+    .div2{
+      height: 300px;
+      background: url(./img/right3.png) center no-repeat;
+      /* border-width: 30px;
+      border-image:url(./img/right3.png) 30 30 round; */
+    }
+  </style>
+</head>
+<body>
+  <div class="div div1"></div>
+  <div class="div div2"></div>
+</body>
+</html>

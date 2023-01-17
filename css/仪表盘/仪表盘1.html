@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>一个基于vue的仪表盘demo</title>
+	<script src="./lib/echarts.js"></script>
+</head>
+
+<body>
+	<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+	<div id="main" style="width: 400px;height:400px;"></div>
+	<script type="text/javascript">
+		// 基于准备好的dom，初始化echarts实例
+		var myChart = echarts.init(document.getElementById('main'));
+		var data = [70, 2];
+		var fontSize = 13;
+		var percent = data[0] / (data[0] + data[1]) * 100;
+		var option = {
+			backgroundColor: "#05233b",
+			series: [
+				{
+					type: 'gauge',
+					name: '外层辅助',
+					radius: '90%',
+      		splitNumber: 100,
+					pointer: {
+						show: false
+					},
+					detail: {
+						show: true,
+						offsetCenter: [-70, '86%'],
+						fontSize: 26,
+						fontWeight: 600,
+						color: '#0095FF'
+					},
+					data: [{
+						value: 70, name: "男："
+					}],
+					title: {
+						show: true,
+						offsetCenter: [-100, '86%'],
+						textStyle: {
+							fontSize: 14,
+							color: "#fff",
+						}
+					},
+					axisLine: {
+						show: false,
+						lineStyle: {
+							color: [
+								[1, '#0a80d5'],
+							],
+							width: 1,
+						}
+					},
+					axisTick: {
+						show: false
+					},
+					splitLine: {
+						show: true,
+						length: 2,
+						lineStyle: {
+							color: '#0a80d5',
+							width: 1,
+							type: 'dashed',
+						},
+					},
+					axisLabel: {
+						show: false
+					}
+				},
+				{
+					name: '最内层线',
+					type: 'gauge',
+					radius: '30%',
+					center: ['50%', '50%'],
+					startAngle: 0,
+					endAngle: 359.999,
+					axisTick: {
+						show: false
+					},
+					splitLine: {
+						show: false
+					},
+					axisLabel: {
+						show: false
+					},
+					axisLine: {
+						show: false,
+						lineStyle: {
+							color: [
+								[1, 'red'],
+							],
+							width: 0,
+							opacity: 0,
+						}
+					},
+					splitLine: {
+						show: false,
+						lineStyle: {
+							width: 0,
+							opacity: 0
+						}
+					},
+					axisLabel: {
+						show: false
+					},
+					axisTick: {
+						length: 2,
+						lineStyle: {
+							color: "#0095FF",
+							width: 0,
+							type: 'solid'
+						}
+					},
+					detail: {
+						show: true,
+						offsetCenter: [110, '258%'],
+						fontSize: 26,
+						fontWeight: 600,
+						color: '#fff'
+					},
+					data: [{
+						value: data[1], name: "女："
+					}],
+					title: {
+						show: true,
+						offsetCenter: [80, '258%'],
+						textStyle: {
+						fontSize: 14,
+							color: "#FFA64B",
+						}
+					},
+					pointer: {
+						show: false
+					}
+				},
+				{
+					name: '内层数据刻度',
+					type: 'gauge',
+					radius: '79%',
+					min: 0,
+					max: 100,
+					center: ['50%', '50%'],
+					// 底盘
+					itemStyle: {
+						color: '#0095FF'
+					},
+					//进程
+					progress: {
+						show: true,
+						width: 30
+					},
+					axisLine: {
+						lineStyle: {
+							width: 30,
+							color: [
+								// [1, '#FFA64B'],
+								[1, '#FFA64B'],
+							],
+						}
+					},
+					splitLine: {
+						show: false,
+						length: 15,
+						lineStyle: {
+							width: 2,
+							color: '#ffffff'
+						}
+					},
+					axisTick: {
+						show: false,
+						lineStyle: {
+							width: 1,
+							color: '#ffffff'
+						}
+					},
+					axisLabel: {
+						show: false,
+						color: "#0095FF",
+						distance: 20,
+						fontSize: fontSize,
+					},
+					detail: {
+						show: false,
+						offsetCenter: ['0', '60%'],
+						color: '#fff',
+						formatter: function (value) {
+							return value.toFixed(1) + "%";
+						},
+						fontSize: 19
+					},
+					//指针
+					itemStyle: {
+						normal: {
+							color: '#1890FF'
+						}
+					},
+					
+					progress: {
+						show: true,
+						width: 30
+					},
+					anchor: {
+						show: true,
+						showAbove: true,
+						size: 15,
+						itemStyle: {
+							borderWidth: 5,
+						}
+					},
+					data: [{
+						value: percent, name: "在线率"
+					}],
+					silent: false,
+					title: {
+
+						show: false,
+						offsetCenter: [0, '75%'],//设置在线率位置
+						color: "#0095FF",
+					}
+				},
+
+			]
+		};
+		
+		// 使用刚指定的配置项和数据显示图表。
+		myChart.setOption(option);
+	</script>
+</body>
+
+</html>

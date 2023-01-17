@@ -1,0 +1,56 @@
+body {
+  background: #000;
+}
+
+h1 {
+  color: #fff;
+  text-align: center;
+}
+
+.circular-progress {
+  position: relative;
+  margin: auto;
+}
+.circular-progress, .circular-progress:before, .circular-progress:after {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+}
+.circular-progress:before, .circular-progress:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+}
+.circular-progress:before {
+  line-height: 8rem;
+  padding: .5em;
+  box-sizing: border-box;
+  font-size: 1.8rem;
+}
+.circular-progress:after {
+  line-height: 13rem;
+}
+
+.html5 {
+  background: linear-gradient(0deg, yellow 100%, rgba(255, 99, 71, 0.2) 50%);
+  transform: rotate(126deg);
+}
+
+.html5:before {
+  content: "";
+  background: #000 content-box;
+  transform: rotate(-126deg);
+  text-transform: uppercase;
+}
+.html5:after {
+  content: "70%";
+  background: linear-gradient(transparent 70%, #000 50%);
+  transform: scale(1.1) rotate(-126deg);
+}
+
+.skills {
+  display: flex;
+  margin-top: 4em;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    a{
+      color: purple;
+    }
+    a:has(span) {
+      color: red;
+    }
+
+    .demo {
+      width: 200px;
+      height: 200px;
+      background: red;
+      container: inline-size;
+    }
+
+    @container (inline-size > 300px) {
+      a {
+        background: green;
+      }
+    }
+    /* // 创建一个名为 A 的级联层 */
+        
+    @layer A, C, B;
+
+    .cascadeLayers {
+      width:100px;
+      height: 100px;
+      background-color: yellow;
+    }
+    @layer A {
+      .cascadeLayers {
+        background-color: red;
+      }
+    }
+
+    @layer B {
+      .cascadeLayers {
+        background-color: blue;
+      }
+    }
+
+    @layer C {
+      .cascadeLayers {
+        background-color: green;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <a href="">
+      <span>我有span</span>
+    </a>
+    <a href="">
+      我没有span
+    </a>
+  </div>
+  <div id="app">
+    <div>
+        <button @click="add" id="add">+</button>
+        <button @click="sub" id="sub">-</button>
+      </div>
+      <div class="demo">
+        <a>我的背景色会随着demo元素的宽度而变化</a>
+      </div>
+  </div>
+  <div class="cascadeLayers">
+    CascadeLayers
+  </div>
+</body>
+<script>
+  document.getElementById('add').addEventListener('click', function () {
+    document.getElementsByClassName('demo')[0].style.width = 400 + 'px';
+});
+document.getElementById('sub').addEventListener('click', function () {
+    document.getElementsByClassName('demo')[0].style.width = 200 + 'px';
+});
+</script>
+</html>

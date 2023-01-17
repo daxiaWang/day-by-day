@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+ 
+    <head>
+        <meta charset="UTF-8" />
+        <title>CSS 仪表盘</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <style type="text/css">
+            * {
+                margin: 0px;
+                padding: 0px;
+                border: 0px;
+            }
+             
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                background: -webkit-linear-gradient(top, #0e83f5 0%, #21bdf6 100%);
+            }
+             
+            .sb {
+                background: transparent;
+                box-sizing: border-box;
+                width: 400px;
+                height: 272.8px;
+                /*272.8px：220度*/
+                margin: 0 auto;
+                position: relative;
+                overflow: hidden;
+            }
+             
+            .deg0 {
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                background: red;
+                border-radius: 50%;
+                top: 0px;
+                left: 0px;
+            }
+             
+            .deg1 {
+                position: absolute;
+                width: 370px;
+                height: 370px;
+                background: -webkit-linear-gradient(top, #0E83F5 0%, #169BF5 100%);
+                border-radius: 50%;
+                top: 15px;
+                left: 15px;
+                z-index: 1000;
+            }
+             
+            .clip1 {
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                background: green;
+                border-radius: 50%;
+                top: 0px;
+                left: 0px;
+                clip: rect(0px, 200px, 200px, 0px);
+                transform: rotate(-113deg);
+                /*对应90+23*/
+            }
+             
+            .clip2 {
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                background: green;
+                border-radius: 50%;
+                top: 0px;
+                left: 0px;
+                clip: rect(0px, 400px, 200px, 200px);
+                transform: rotate(113deg);
+            }
+             
+            .clip3 {
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                background: green;
+                border-radius: 50%;
+                top: 0px;
+                left: 0px;
+                clip: rect(200px, 200px, 400px, 0px);
+                transform: rotate(-23deg);
+                /*对应20度*/
+            }
+             
+            .clip4 {
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                background: green;
+                border-radius: 50%;
+                top: 0px;
+                left: 0px;
+                clip: rect(200px, 400px, 400px, 200px);
+                transform: rotate(23deg);
+                /*对应20度*/
+            }
+             
+            p.num {
+                position: absolute;
+                width: 400px;
+                height: 200px;
+                top: 150px;
+                color: red;
+                text-align: center;
+                font-size: 100px;
+                z-index: 10000;
+            }
+        </style>
+        <script src="js/jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript">
+            $(function() {
+                var sbs = 9000;
+                //默认数字0--10000，默认数字自增步长100
+                var buchang = 100;
+                var deg = 220 * buchang / 10000; //每个步长代表的度数  2.2
+                var degs = sbs / buchang * deg; //先计算有几个步长,算出半圆要转的度数
+                var du = -23; //起始度数
+                var num = 0;
+                console.log(degs)
+                var sb = setInterval(function() {
+                    $(".num").text(num);
+                    if(du <= 67) {
+                        $(".clip3").css("transform", "rotate(" + du + "deg)");
+                    } else if(du > 67 && du <= 157) {
+                        $(".clip3").css("transform", "rotate(67deg)");
+                        $(".clip1").css("transform", "rotate(" + (-23 + (du - 67)) + "deg)");
+                    } else if(du > 157 && du <= 220) {
+                        $(".clip3").css("transform", "rotate(67deg)");
+                        $(".clip1").css("transform", "rotate(67deg)");
+                        $(".clip4").css("transform", "rotate(90deg)");
+                        $(".clip2").css("transform", "rotate(" + (-23 + (du - 157)) + "deg)");
+                    }
+ 
+                    if(du >= degs || num >= sbs) {
+                        clearInterval(sb)
+                    }
+                    du += deg;
+ 
+                    num += buchang;
+                }, 20)
+            })
+        </script>
+    </head>
+ 
+    <body>
+        <div class="sb">
+            <div class="deg0">
+                <div class="deg1"></div>
+            </div>
+            <div class="clip1"></div>
+            <div class="clip2"></div>
+            <div class="clip3"></div>
+            <div class="clip4"></div>
+            <p class="num">0</p>
+        </div>
+    </body>
+ 
+</html>
